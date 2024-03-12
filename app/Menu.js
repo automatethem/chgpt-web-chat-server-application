@@ -1,3 +1,3 @@
-import Page from "./Menus/chat/Menu.js";
+import Page from "./Menus/chat/ai-web-chat/Menu.js";
 
 export default Page;
