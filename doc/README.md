@@ -47,7 +47,7 @@ https://chgpt-web-chat-server-app.vercel.app/
 
 ### github
 
-https://github.com/xxx/chgpt-web-chat-server-application
+https://github.com/dpk0013/chgpt-web-chat-server-application
 
 github 사용자 이름: dpk0013
 
