@@ -1,0 +1,10 @@
+CREATE TABLE "AiWebChatSetting" (
+    "id"    serial primary key,
+    "useLogoImage" BOOLEAN DEFAULT FALSE,
+    "logoImageUrl" TEXT DEFAULT '',
+    "useAssistantImage" BOOLEAN DEFAULT FALSE,
+    "assistantImageUrl" TEXT DEFAULT '',
+    "useUserImage" BOOLEAN DEFAULT FALSE,
+    "userImageUrl" TEXT DEFAULT '',
+    "useAiWebChat" BOOLEAN DEFAULT TRUE
+);

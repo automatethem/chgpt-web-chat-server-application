@@ -1,0 +1,4 @@
+CREATE TABLE "ApiSetting" (
+    "id"    serial primary key,
+    "apiUrl" TEXT DEFAULT ''
+);
