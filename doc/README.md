@@ -9,6 +9,9 @@ https://kmong.com/inboxes?inbox_group_id=33262276&partner_id=1278670&page=1&type
 k1004444@naver.com  
 CHGPT 
 
+k1004444@naver.com / Younmedia1@  
+github
+
 ## supabase
 
 https://supabase.com/dashboard/project/vsioszncbpmkbqkfehvi
@@ -39,10 +42,6 @@ npm start
 
 http://localhost:3000
 
-## vercel
-
-https://chgpt-web-chat-server-app.vercel.app/
-
 ## customer
 
 ### github
@@ -55,4 +54,4 @@ github 액세스 토큰:
 
 ### vercel
 
-https://chgpt-web-chat-server-application.vercel.app/
+https://chgpt01.vercel.app/
