@@ -49,7 +49,7 @@ https://chgpt-web-chat-server-app.vercel.app/
 
 https://github.com/xxx/chgpt-web-chat-server-application
 
-github 사용자 이름: 
+github 사용자 이름: dpk0013
 
 github 액세스 토큰: 
 
