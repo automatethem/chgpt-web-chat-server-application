@@ -9,6 +9,8 @@ https://kmong.com/inboxes?inbox_group_id=33262276&partner_id=1278670&page=1&type
 k1004444@naver.com  
 CHGPT 
 
+웹앱패키징을 통해 어플리케이션 스토어에 출시
+
 k1004444@naver.com / Younmedia1@  
 github
 
