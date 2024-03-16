@@ -8,3 +8,9 @@ CREATE TABLE "AiWebChatSetting" (
     "userImageUrl" TEXT DEFAULT '',
     "useAiWebChat" BOOLEAN DEFAULT TRUE
 );
+
+CREATE TABLE "AiWebChatMenu" (
+    "id"    serial primary key,
+    "menu" VARCHAR(255) DEFAULT '',
+    "url" VARCHAR(255) DEFAULT ''
+);
