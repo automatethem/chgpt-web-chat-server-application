@@ -6,6 +6,7 @@ const Page = () => {
     <h2 className="menu-title"><a href="/admin/chat/ai-web-chat">AI 웹 챗 관리</a></h2>
     <ul>
         <li><a href="/" target="_blank">AI 웹 챗 가기</a></li>
+        <li><a href="/admin/chat/ai-web-chat/menu">메뉴 관리</a></li>
         <li><a href="/admin/chat/ai-web-chat/setting">설정</a></li>
         <li><a href="/admin/chat/ai-web-chat/connect">웹 사이트 연동 방법</a></li>
     </ul>
