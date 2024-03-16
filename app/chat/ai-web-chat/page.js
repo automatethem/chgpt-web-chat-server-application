@@ -40,6 +40,8 @@ function Page() {
   const [isTyping, setIsTyping] = useState(false);
   const messagesBottomRef = useRef(null);
   //
+  const [menus, setMenus] = useState([]);
+  //
   const [id, setId] = useState(null);
   const [useLogoImage, setUseLogoImage] = useState(false);
   const [logoImageUrl, setLogoImageUrl] = useState('');
@@ -52,11 +54,22 @@ function Page() {
 
   useEffect(async () => {
     setLoading(true);
-    const { data: aiWebChatSetting, error } = await supabase
+    const { data, error } = await supabase
+      .from('AiWebChatMenu')
+      .select('*')
+      .order("priority");
+    if (!error) {
+      setMenus(data);
+    } 
+    else {
+      console.error('Failed to fetch menu items:', error.message);
+    }
+   
+    const { data: aiWebChatSetting, aiWebChatSettingError } = await supabase
     .from('AiWebChatSetting')
     .select('*')
     .single();
-    if (!error) {
+    if (!aiWebChatSettingError) {
       const {
         id,
         useLogoImage,
@@ -97,7 +110,16 @@ function Page() {
       <div className='fixed z-10 ml-4 mt-4'>
       {useLogoImage? <img src={logoImageUrl} className="max-w-sm rounded-lg shadow-2xl w-16" /> : <img src="/chat/ai-web-chat/logo.png" className="max-w-sm rounded-lg shadow-2xl w-16" />}
       </div>
-
+      {menus.length > 0 ? 
+      <div className='fixed z-10 ml-20 mt-4'>
+        <ul className="ml-4 menu menu-horizontal bg-base-200 rounded-box">
+          {menus.map((menu) => {
+            return <li key={menu.id}><a href={menu.url} target="_blank">{menu.name}</a></li>
+          })}
+        </ul>
+      </div>
+      : null
+      }
       <div className="mockup-window border bg-base-300 w-full h-full flex flex-col">
         <div className='p-5 pb-8 flex-grow overflow-auto'>
           {
