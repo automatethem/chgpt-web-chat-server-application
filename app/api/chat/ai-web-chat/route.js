@@ -69,7 +69,16 @@ export async function POST(request) {
           langchainAgentHandler = new LangchainAgentHandler({prompt, tools}); 
         //}
 
-        const response = await langchainAgentHandler.handleStream(messages);
+        const response = await langchainAgentHandler.handleStream(messages, async (text) => {
+            if (aiSetting.useMessageLog) {
+                const msg = messages[messages.length - 1].content;
+                await supabase
+                    .from('AiMessageLog')
+                    .insert([
+                        { message: msg, reply: text }
+                    ]);
+            }
+        });
         //console.log(response);
         return new StreamingTextResponse(response);
       }
