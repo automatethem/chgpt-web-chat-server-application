@@ -15,6 +15,7 @@ export default function Page() {
   const [useTavilysearchTool, setUseTavilysearchTool] = useState(false);
   const [tavilysearchToolApiKey, setTavilysearchToolApiKey] = useState('');
   const [useWebbrowserTool, setUseWebbrowserTool] = useState(false);
+  const [useMessageLog, setUseMessageLog] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const fetchSettings = async () => {
@@ -34,7 +35,8 @@ export default function Page() {
         useCoinPriceTool,
         useTavilysearchTool,
 	      tavilysearchToolApiKey,
-        useWebbrowserTool
+        useWebbrowserTool,
+	      useMessageLog
       } = data;
       setId(id);
       setUseAi(useAi);
@@ -46,6 +48,7 @@ export default function Page() {
       setUseTavilysearchTool(useTavilysearchTool);
       setTavilysearchToolApiKey(tavilysearchToolApiKey);
       setUseWebbrowserTool(useWebbrowserTool);
+      setUseMessageLog(useMessageLog);
     }
     setLoading(false);
   };
@@ -68,7 +71,8 @@ export default function Page() {
         useCoinPriceTool: useCoinPriceTool,
         useTavilysearchTool: useTavilysearchTool,
         tavilysearchToolApiKey: tavilysearchToolApiKey,
-        useWebbrowserTool: useWebbrowserTool
+        useWebbrowserTool: useWebbrowserTool,
+        useMessageLog: useMessageLog
       })
       .match({ id: id });
 
@@ -183,7 +187,16 @@ export default function Page() {
           className="w-full shadow py-2 px-3 border"
         />
       </div>
-  
+
+      <div className="mb-3">
+        <label className="block font-bold mb-1">메시지 로그 사용</label>
+        <input
+          type="checkbox"
+          checked={useMessageLog}
+          onChange={(e) => setUseMessageLog(e.target.checked)}
+        />
+      </div>
+            
       <button
         type="submit"
         className="shadow py-2 px-3 border bg-blue-500"
