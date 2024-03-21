@@ -1,0 +1,29 @@
+CREATE TABLE "AiSetting" (
+    "id"    serial primary key,
+    "useAi" BOOLEAN DEFAULT FALSE,
+    "systemPrompt" TEXT DEFAULT '당신은 도우미 챗봇 입니다.',
+    "useOpenai" BOOLEAN DEFAULT FALSE,
+    "openaiModel" TEXT DEFAULT 'gpt-4',
+    "openaiApiKey" TEXT DEFAULT 'sk-111111111111111111111111111111111111111111111111',
+    "useCoinPriceTool" BOOLEAN DEFAULT FALSE,
+    "useTavilysearchTool" BOOLEAN DEFAULT FALSE,
+    "tavilysearchToolApiKey" TEXT DEFAULT 'tvly-11111111111111111111111111111111',
+    "useWebbrowserTool" BOOLEAN DEFAULT FALSE,
+    "useMessageLog" BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE "AiMessageLog" (
+    "id"    serial primary key,
+    "message" TEXT DEFAULT '',
+    "reply" TEXT DEFAULT '',
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE "AiRag" (
+    "id"    serial primary key,
+    "name" VARCHAR(255) DEFAULT 'search_service',
+    "description" TEXT DEFAULT 'Searches and returns documents about service.',
+    "tableName" VARCHAR(255) DEFAULT 'service_documents',
+    "queryName" VARCHAR(255) DEFAULT 'match_service_documents',
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
