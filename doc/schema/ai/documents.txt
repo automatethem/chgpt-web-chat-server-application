@@ -5,6 +5,9 @@
 -- Enable the pgvector extension to work with embedding vectors
 create extension vector;
 
+drop table documents;
+drop function match_documents;
+
 -- Create a table to store your documents
 create table documents (
   id bigserial primary key,
