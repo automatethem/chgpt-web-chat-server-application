@@ -1,6 +1,6 @@
-CREATE TABLE "InfoCommandSetting" (
+CREATE TABLE "CommandSetting" (
     "id"    serial primary key,
-    "useInfoCommand" BOOLEAN DEFAULT FALSE,
+    "useCommand" BOOLEAN DEFAULT FALSE,
     "useCoinPriceCommand" BOOLEAN DEFAULT FALSE,
     "useCoinPriceSimpleMessage" BOOLEAN DEFAULT FALSE,
     "useCoinPriceOhlcvMessage" BOOLEAN DEFAULT FALSE,
@@ -8,5 +8,6 @@ CREATE TABLE "InfoCommandSetting" (
     "coinbaseApiKey" TEXT DEFAULT '',
     "coinbaseSecret" TEXT DEFAULT '',
     "useMarketCapitalizationCommand" BOOLEAN DEFAULT FALSE,
-    "coinMarketCapApiKey" TEXT DEFAULT 'd02b1111-8e74-4b32-9834-c8e4c202222'
+    "coinMarketCapApiKey" TEXT DEFAULT 'd02b1111-8e74-4b32-9834-c8e4c202222',
+    "useFortuneCommand" BOOLEAN DEFAULT FALSE
 );
