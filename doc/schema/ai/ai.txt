@@ -21,9 +21,16 @@ CREATE TABLE "AiMessageLog" (
 
 CREATE TABLE "AiRag" (
     "id"    serial primary key,
-    "name" VARCHAR(255) DEFAULT 'search_service',
-    "description" TEXT DEFAULT 'Searches and returns documents about service.',
-    "tableName" VARCHAR(255) DEFAULT 'service_documents',
-    "queryName" VARCHAR(255) DEFAULT 'match_service_documents',
+    "name" VARCHAR(255) DEFAULT 'search_xxx',
+    "description" TEXT DEFAULT 'Searches and returns documents about xxx.',
+    "tableName" VARCHAR(255) DEFAULT 'documents',
+    "queryName" VARCHAR(255) DEFAULT 'match_documents',
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE "AiRagMessage" (
+    "id"    serial primary key,
+    "title" VARCHAR(255) DEFAULT '',
+    "message" TEXT DEFAULT '',
     "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
