@@ -50,22 +50,29 @@ export async function POST(request) {
               new MessagesPlaceholder("agent_scratchpad"),
           ]);
             
-          const tools = [
-              //createSupabaseRetrieverTool({
-              //    name: "search_jeju_motel", 
-              //    description: "Searches and returns documents regarding the jeju motel and hotel."
-              //}),
-              //createCoinPriceTool(), 
-              //createWebbrowserTool(), 
-              //createTavilysearchTool()
-          ];
+          const tools = [];
+        
           if (aiSetting.useCoinPriceTool) 
             tools.push(createCoinPriceTool());
           if (aiSetting.useTavilysearchTool) 
             tools.push(createWebbrowserTool());
           if (aiSetting.useWebbrowserTool) 
             tools.push(createTavilysearchTool());
-            
+
+          const { data: aiRags } = await supabase
+          .from('AiRag')
+          .select('*');
+
+          for (const aiRag of aiRags) {
+            const tool = createSupabaseRetrieverTool({
+                tableName: aiRag.tableName,
+                queryName: aiRag.description,
+                name: aiRag.name, 
+                description: aiRag.description
+            });
+            tools.push(tool);
+          }
+          
           langchainAgentHandler = new LangchainAgentHandler({prompt, tools}); 
         //}
 
