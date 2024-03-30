@@ -66,7 +66,7 @@ export async function POST(request) {
           for (const aiRag of aiRags) {
             const tool = createSupabaseRetrieverTool({
                 tableName: aiRag.tableName,
-                queryName: aiRag.description,
+                queryName: aiRag.queryName,
                 name: aiRag.name, 
                 description: aiRag.description
             });
