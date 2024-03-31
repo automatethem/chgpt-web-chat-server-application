@@ -32,6 +32,22 @@ const Page = () => {
         <br/>
         <img src="/admin/server-management/supabase/7.png" />        
       </div>
+
+      <div className="mb-3">
+        <p className="block font-bold mb-1">파일 수동 업로드</p>
+
+        <img src="/admin/server-management/supabase/file-upload1.png" />
+        <br/>
+        <img src="/admin/server-management/supabase/file-upload2.png" />
+        <br/>
+        <img src="/admin/server-management/supabase/file-upload3.png" />
+        <br/>
+        <img src="/admin/server-management/supabase/file-upload4.png" />   
+        <br/>
+        복사 주소 예:
+        <br/>
+        https://aycwwkiczzdriqmhxxx.supabase.co/storage/v1/object/public/WebSitePage/company/cranberry.png 
+      </div>
   
     </div>
   );
