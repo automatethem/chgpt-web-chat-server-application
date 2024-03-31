@@ -135,7 +135,7 @@ export default function Page() {
       <div className="mb-3">
         <label className="block font-bold mb-1">Openai api 키</label>
 	<p>api 키 만들기: <a href="https://platform.openai.com/api-keys" target="_blank">https://platform.openai.com/api-keys</a></p>
-        <p>api 키 만들고 신용 카드까지 등록해야 정상적으로 사용 가능</p>	
+        <p>api 키 만들고 신용 카드 등록후 충전해야 정상적으로 사용 가능:  <a href="https://platform.openai.com/account/billing/overview" target="_blank">https://platform.openai.com/account/billing/overview</a></p>	
         <input
           type="text"
           value={openaiApiKey}
