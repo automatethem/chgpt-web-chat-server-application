@@ -136,26 +136,24 @@ function Page() {
   return (
     <>
     <section className='container mx-auto p-5 fixed inset-0'>
-      <div className='fixed z-10 ml-4 mt-4'>
-      {useLogoImage? <img src={logoImageUrl} className="max-w-sm rounded-lg shadow-2xl w-16" /> : <img src="/chat/ai-web-chat/logo.png" className="max-w-sm rounded-lg shadow-2xl w-16" />}
+      <div className='fixed z-10 ml-2 mt-2'>
+      {useLogoImage? <img src={logoImageUrl} className="max-w-sm rounded-lg shadow-2xl w-20" /> : <img src="/chat/ai-web-chat/logo.png" className="max-w-sm rounded-lg shadow-2xl w-20" />}
       </div>
       {menus.length > 0 ? 
-      <div className='fixed z-10 ml-20 mt-4'>
-        <ul className="ml-4 menu menu-horizontal bg-base-200 rounded-box">
+      <div className='fixed z-10 ml-20 mt-2'>
+        <ul className="ml-4 menu menu-horizontal bg-base-200 bg-opacity-80 rounded-box">
           {menus.map((menu) => {
             if (menu.url)
               return <li key={menu.id} className="ml-1 mr-1"><a href={menu.url} target="_blank">{menu.name}</a></li>
             else {
-              if (menus.length == 1)
-                return <li key={menu.id} className="ml-1 mr-1 font-bold">{menu.name}</li>
-              else
-                return <li key={menu.id} className="mt-2 ml-1 mr-1 font-bold">{menu.name}</li>
+              return <li key={menu.id} className="ml-1 font-bold"><a href="#">{menu.name}</a></li>
             }
           })}
         </ul>
       </div>
       : null
       }
+
       <div className="mockup-window border bg-base-300 w-full h-full flex flex-col">
         <div className='p-5 pb-8 flex-grow overflow-auto'>
           {
