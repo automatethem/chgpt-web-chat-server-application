@@ -141,7 +141,7 @@ function Page() {
       </div>
       {menus.length > 0 ? 
       <div className='fixed z-10 ml-20 mt-2'>
-        <ul className="ml-4 menu menu-horizontal bg-base-200 bg-opacity-80 rounded-box">
+        <ul className="ml-4 menu menu-horizontal bg-base-200 bg-opacity-70 rounded-box">
           {menus.map((menu) => {
             if (menu.url)
               return <li key={menu.id} className="ml-1 mr-1"><a href={menu.url} target="_blank">{menu.name}</a></li>
