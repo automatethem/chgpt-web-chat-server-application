@@ -20,6 +20,16 @@ const nextConfig = {
     };
 
     return config;
+  },
+  rewrites: async () => {
+    return [
+      {
+        source: "/api/fastapi/api/:path*",
+        destination: "/api/fastapi/api/:path*"
+        //destination: "http://127.0.0.1:8000/api/fastapi/api/:path*"
+        //destination: process.env.NODE_ENV === "production" ? (process.env.VERCEL === '1' ? "/api/fastapi/api/:path*" : "http://127.0.0.1:8000/api/fastapi/api/:path*") : "http://127.0.0.1:8000/api/fastapi/api/:path*"
+      },
+    ];
   }
 }
 
