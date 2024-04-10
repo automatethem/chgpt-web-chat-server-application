@@ -2,12 +2,14 @@
   "name": "chgpt-web-chat-server-app",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
+  "scripts": {   
     "dev": "next dev",
+    "dev_": "concurrently \"next dev\" \"pip3 install -r requirements.txt && python3 -m uvicorn api.fastapi.api.index:app --port 8000 --reload\"",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint" 
-  },      
+    "start_": "concurrently \"next start\" \"pip3 install -r requirements.txt && python3 -m uvicorn api.fastapi.api.index:app --port 8000 --reload\"",
+    "lint": "next lint"  
+  },  
   "dependencies": {
     "react": "18.2.0",
     "react-dom": "18.2.0",
