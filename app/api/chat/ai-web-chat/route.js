@@ -59,19 +59,13 @@ export async function POST(request) {
           if (aiSetting.useWebbrowserTool) 
             tools.push(createTavilysearchTool());
 
-          const { data: aiRags } = await supabase
-          .from('AiRag')
-          .select('*');
-
-          for (const aiRag of aiRags) {
-            const tool = createSupabaseRetrieverTool({
-                tableName: aiRag.tableName,
-                queryName: aiRag.queryName,
-                name: aiRag.name, 
-                description: aiRag.description
-            });
-            tools.push(tool);
-          }
+          const tool = createSupabaseRetrieverTool({
+              name: 'search_from_user_uploaded_documents', 
+              description: 'Searches and returns documents from user uploaded documents.',
+              tableName: 'documents',
+              queryName: 'match_documents'
+          });
+          tools.push(tool);
           
           langchainAgentHandler = new LangchainAgentHandler({prompt, tools}); 
         //}
