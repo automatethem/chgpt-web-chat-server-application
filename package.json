@@ -4,10 +4,8 @@
   "private": true,
   "scripts": {   
     "dev": "next dev",
-    "dev_": "concurrently \"next dev\" \"pip3 install -r requirements.txt && python3 -m uvicorn api.fastapi.api.index:app --port 8000 --reload\"",
     "build": "next build",
     "start": "next start",
-    "start_": "concurrently \"next start\" \"pip3 install -r requirements.txt && python3 -m uvicorn api.fastapi.api.index:app --port 8000 --reload\"",
     "lint": "next lint"  
   },  
   "dependencies": {
@@ -33,7 +31,10 @@
     "socks-proxy-agent": "^8.0.2",
 
     "langchain": "^0.1.2",
+    "pdf-parse": "^1.1.1",
+    "d3-dsv": "^2.0.0",
     "ai": "2.1.31",
+    
     "react-markdown": "8.0.7",
     "rehype-external-links": "^3.0.0",
     "rehype-raw": "^7.0.0",
