@@ -60,8 +60,8 @@ export async function POST(request) {
             tools.push(createTavilysearchTool());
 
           const tool = createSupabaseRetrieverTool({
-              name: 'search_from_user_uploaded_documents', 
-              description: 'Searches and returns documents from user uploaded documents.',
+              name: 'search_documents_about_user_question', 
+              description: 'Searches and returns documents if has no information about user question.',
               tableName: 'documents',
               queryName: 'match_documents'
           });
