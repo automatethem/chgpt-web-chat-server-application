@@ -13,10 +13,14 @@ export default function AiRagTextPage() {
   const [loading, setLoading] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [vectorizing, setVectorizing] = useState(false);
 
   const fetchAiRagTexts = async () => {
     setLoading(true);
-    const { data, error } = await supabase.from('AiRagText').select('*').order('date', { ascending: false });
+    const { data, error } = await supabase
+      .from('AiRagText')
+      .select('*')
+      .order('date', { ascending: false });
     if (!error) {
       setAiRagTexts(data);
     } else {
@@ -30,7 +34,10 @@ export default function AiRagTextPage() {
     if (!confirmDelete) return;
 
     setLoading(true);
-    const { error } = await supabase.from('AiRagText').delete().eq('id', id);
+    const { error } = await supabase
+      .from('AiRagText')
+      .delete()
+      .eq('id', id);
     if (error) {
       console.error('Failed to delete text:', error.message);
     } else {
@@ -94,6 +101,24 @@ export default function AiRagTextPage() {
     setLoading(false);
   };
 
+  const vectorize = async () => {
+    //setLoading(true);
+    setVectorizing(true);
+    
+    const response = await fetch('/api/ai/rag/text', {
+        method: 'POST'
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert("벡터화 완료");
+    }
+
+    //setLoading(false);
+    setVectorizing(false);
+  };
+
   useEffect(() => {
     fetchAiRagTexts();
   }, []);
@@ -115,7 +140,11 @@ export default function AiRagTextPage() {
       <button
         type="button"
         className="ml-2 mb-3 shadow py-2 px-3 border bg-blue-500"
+        onClick={() => vectorize()}
       >
+        {
+          vectorizing ? (<span className="loading loading-spinner text-primary"></span>) : null
+        }
         벡터화 하기
       </button>
 
