@@ -19,7 +19,15 @@ CREATE TABLE "AiMessageLog" (
     "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE "AiRag" (
+CREATE TABLE "AiRagText" (
+    "id"    serial primary key,
+    "title" VARCHAR(255) DEFAULT '',
+    "message" TEXT DEFAULT '',
+    "vectorize" BOOLEAN DEFAULT TRUE,
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE "AiRagFile" (
     "id"    serial primary key,
     "fileName" VARCHAR(255),
     "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
