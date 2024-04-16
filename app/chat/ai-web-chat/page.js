@@ -50,8 +50,6 @@ function Page() {
   const [assistantImageUrl, setAssistantImageUrl] = useState('');
   const [useUserImage, setUseUserImage] = useState(false);
   const [userImageUrl, setUserImageUrl] = useState('');
-  const [useFooter, setUseFooter] = useState(false);
-  const [footer, setFooter] = useState('');
   const [useAiWebChat, setUseAiWebChat] = useState(true);
   const [loading, setLoading] = useState(true);
 
@@ -93,8 +91,6 @@ function Page() {
         assistantImageUrl,
         useUserImage,
         userImageUrl,
-        useFooter,
-        footer,
         useAiWebChat
       } = aiWebChatSetting;
       setId(id);
@@ -104,8 +100,6 @@ function Page() {
       setAssistantImageUrl(assistantImageUrl);
       setUseUserImage(useUserImage);
       setUserImageUrl(userImageUrl);
-      setUseFooter(useFooter);
-      setFooter(footer);
       setUseAiWebChat(useAiWebChat);
     }
     console.log(aiWebChatSetting);
@@ -225,16 +219,7 @@ function Page() {
           </div>
         </form>
       </div>
-
-      {useFooter ? 
-        <div className="flex w-full justify-center">
-        <p className="text-xs">{footer}</p>
-        </div>
-        : null
-      }
     </section>
-
-
     </>
   );
 }
