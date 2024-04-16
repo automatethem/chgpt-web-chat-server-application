@@ -8,6 +8,9 @@ export default function AiRagPage() {
   const [files, setFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [deletingId, setDeletingId] = useState(1);
+  const [uploading, setUploading] = useState(false);
 
   const fetchFiles = async () => {
     setLoading(true);
@@ -27,7 +30,10 @@ export default function AiRagPage() {
     const confirmDelete = window.confirm("정말로 삭제 하시겠습니까?");
     if (!confirmDelete) return;
 
-    setLoading(true);
+    //setLoading(true);
+    setDeleting(true);
+
+    setDeletingId(id);
 
     //DELETE FROM documents WHERE (metadata->'source') = '"/tmp/manual.txt"';
     const { error } = await supabase
@@ -45,13 +51,16 @@ export default function AiRagPage() {
       await fetchFiles();
     }
     
-    setLoading(false);
+    //setLoading(false);
+    setDeleting(false);
   };
 
   const uploadFile = async () => {
     if (!selectedFile) return;
 
-    setLoading(true);
+    //setLoading(true);
+    setUploading(true);
+
     const fileName = selectedFile.name;
 
     // Upload to custom API and save to disk
@@ -81,7 +90,9 @@ export default function AiRagPage() {
       console.error('Failed to save file to disk:', result.error);
     }
 
-    setLoading(false);
+    //setLoading(false);
+    setUploading(false);
+
     setSelectedFile(null);
   };
 
@@ -109,7 +120,11 @@ export default function AiRagPage() {
               <tr key={file.id}>
                 <td>{file.fileName}</td>
                 <td>{new Date(file.date).toLocaleString()}</td>
-                <td><button onClick={() => deleteFile(file.id, file.fileName)}>삭제</button></td>
+                <td><button onClick={() => deleteFile(file.id, file.fileName)}>
+                  {
+                    uploading && deletingId == file.id ? (<span className="loading loading-spinner text-primary"></span>) : null
+                  } 
+                  삭제</button></td>
               </tr>
             ))}
           </tbody>
@@ -130,6 +145,9 @@ export default function AiRagPage() {
           disabled={loading || !selectedFile}
           onClick={uploadFile}
         >
+          {
+            uploading ? (<span className="loading loading-spinner text-primary"></span>) : null
+          }
           업로드
         </button>
       </div>
