@@ -148,11 +148,13 @@ export default function AiRagTextPage() {
         벡터화 하기
       </button>
 
+      데이터 수정후 벡터화 하기 버튼을 눌러 주어야 수정된 데이터가 반영 됩니다.
+
       {showAddModal && (
         <div className="modal modal-open">
           <div className="modal-box">
             <h3 className="font-bold text-lg">텍스트 추가</h3>
-            <div className="py-4">
+            <div className="py-2">
               <div className="mb-2">
                 <label className="label">
                   <span className="label-text">제목</span>
@@ -172,7 +174,7 @@ export default function AiRagTextPage() {
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   className="textarea textarea-bordered"
-                  rows="3"
+                  rows="7" cols="60"
                 ></textarea>
               </div>
               <div className="mb-2">
@@ -199,7 +201,7 @@ export default function AiRagTextPage() {
         <div className="modal modal-open">
           <div className="modal-box">
             <h3 className="font-bold text-lg">텍스트 수정</h3>
-            <div className="py-4">
+            <div className="py-2">
               <div className="mb-2">
                 <label className="label">
                   <span className="label-text">제목</span>
@@ -219,7 +221,7 @@ export default function AiRagTextPage() {
                 <textarea
                   className="textarea textarea-bordered"
                   placeholder="메시지"
-                  rows="3"
+                  rows="7" cols="60"
                   value={editingText.message}
                   onChange={handleEditChange('message')}
                 ></textarea>
