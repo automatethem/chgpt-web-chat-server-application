@@ -67,7 +67,7 @@ export async function POST(request) {
           });
           tools.push(tool);
           
-          langchainAgentHandler = new LangchainAgentHandler({prompt, tools}); 
+          langchainAgentHandler = new LangchainAgentHandler({prompt, modelName: aiSetting.openaiModelName, tools}); 
         //}
 
         const response = await langchainAgentHandler.handleStream(messages, async (text) => {
