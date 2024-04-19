@@ -3,7 +3,7 @@ CREATE TABLE "AiSetting" (
     "useAi" BOOLEAN DEFAULT FALSE,
     "systemPrompt" TEXT DEFAULT '당신은 도우미 챗봇 입니다.',
     "useOpenai" BOOLEAN DEFAULT FALSE,
-    "openaiModel" VARCHAR(255) DEFAULT 'gpt-4',
+    "openaiModelName" VARCHAR(255) DEFAULT 'gpt-3.5-turbo',
     "openaiApiKey" VARCHAR(255) DEFAULT 'sk-111111111111111111111111111111111111111111111111',
     "useCoinPriceTool" BOOLEAN DEFAULT FALSE,
     "useTavilysearchTool" BOOLEAN DEFAULT FALSE,
