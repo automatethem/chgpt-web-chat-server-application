@@ -9,7 +9,7 @@ export default function Page() {
   const [useAi, setUseAi] = useState(false);
   const [systemPrompt, setSystemPrompt] = useState('');
   const [useOpenai, setUseOpenai] = useState(false);
-  const [openaiModel, setOpenaiModel] = useState(false);
+  const [openaiModelName, setOpenaiModelName] = useState(false);
   const [openaiApiKey, setOpenaiApiKey] = useState('');
   const [useCoinPriceTool, setUseCoinPriceTool] = useState(false);
   const [useTavilysearchTool, setUseTavilysearchTool] = useState(false);
@@ -30,7 +30,7 @@ export default function Page() {
         useAi,
         systemPrompt,
       	useOpenai,
-	      openaiModel,
+	      openaiModelName,
       	openaiApiKey,
         useCoinPriceTool,
         useTavilysearchTool,
@@ -42,7 +42,7 @@ export default function Page() {
       setUseAi(useAi);
       setSystemPrompt(systemPrompt);
       setUseOpenai(useOpenai);
-      setOpenaiModel(openaiModel);
+      setOpenaiModelName(openaiModelName);
       setOpenaiApiKey(openaiApiKey);
       setUseCoinPriceTool(useCoinPriceTool);
       setUseTavilysearchTool(useTavilysearchTool);
@@ -66,7 +66,7 @@ export default function Page() {
         useAi: useAi,
         systemPrompt: systemPrompt,
         useOpenai: useOpenai,
-	      openaiModel: openaiModel,
+	      openaiModelName: openaiModelName,
         openaiApiKey: openaiApiKey,
         useCoinPriceTool: useCoinPriceTool,
         useTavilysearchTool: useTavilysearchTool,
@@ -121,13 +121,15 @@ export default function Page() {
       </div>
 
       <div className="mb-3">
-        <label className="block font-bold mb-1">Openai 모델</label>  
-	<p>플레이 그라운드 (<a href="https://platform.openai.com/playground" target="_blank">https://platform.openai.com/playground</a>) 우측 상단 모델 리스트의 모델중 하나 선택</p>
+        <label className="block font-bold mb-1">Openai 모델 이름</label>  
+	<p>예) gpt-3.5-turbo</p>
+        <p>예) gpt-4</p>
+        <p>플레이 그라운드 (<a href="https://platform.openai.com/playground" target="_blank">https://platform.openai.com/playground</a>) 우측 상단 모델 리스트의 모델 이름중 하나 선택</p>
         <p>모델에 대한 세부 사항은 여기 (<a href="https://platform.openai.com/docs/models/overview" target="_blank">https://platform.openai.com/docs/models/overview</a>) 를 참고</p>
         <input
           type="text"
-          value={openaiModel}
-          onChange={(e) => setOpenaiModel(e.target.value)}
+          value={openaiModelName}
+          onChange={(e) => setOpenaiModelName(e.target.value)}
           className="w-full shadow py-2 px-3 border"
         />
       </div>
