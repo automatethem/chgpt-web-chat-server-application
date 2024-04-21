@@ -138,10 +138,9 @@ function Page() {
         <ul className="ml-4 menu menu-horizontal bg-base-200 bg-opacity-70 rounded-box">
           {menus.map((menu) => {
             if (menu.url)
-              return <li key={menu.id} className="ml-1 mr-1"><a href={menu.url} target="_blank">{menu.name}</a></li>
-            else {
+              return <li key={menu.id} className="ml-1 mr-1"><a href={menu.url} target={menu.openWindow ? '_blank': '_self'}>{menu.name}</a></li>
+            else 
               return <li key={menu.id} className="ml-1 font-bold"><a href="#">{menu.name}</a></li>
-            }
           })}
         </ul>
       </div>
