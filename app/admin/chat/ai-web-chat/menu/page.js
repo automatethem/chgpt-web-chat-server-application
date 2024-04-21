@@ -10,9 +10,11 @@ export default function AiWebChatMenuPage() {
   const [selectedMenuName, setSelectedMenuName] = useState('');
   const [selectedMenuUrl, setSelectedMenuUrl] = useState('');
   const [selectedMenuPriority, setSelectedMenuPriority] = useState(1);
+  const [selectedMenuOpenWindow, setSelectedMenuOpenWindow] = useState(false); // 추가된 부분
   const [newMenuName, setNewMenuName] = useState('');
   const [newMenuUrl, setNewMenuUrl] = useState('');
   const [newMenuPriority, setNewMenuPriority] = useState(1);
+  const [newMenuOpenWindow, setNewMenuOpenWindow] = useState(false); // 추가된 부분
   const [loading, setLoading] = useState(false);
 
   const fetchMenus = async () => {
@@ -38,7 +40,8 @@ export default function AiWebChatMenuPage() {
       .update({
         name: selectedMenuName,
         url: selectedMenuUrl,
-        priority: selectedMenuPriority
+        priority: selectedMenuPriority,
+        openWindow: selectedMenuOpenWindow // 추가된 부분
       })
       .eq('id', selectedMenuId);
     if (error) {
@@ -72,7 +75,12 @@ export default function AiWebChatMenuPage() {
     const { error } = await supabase
       .from('AiWebChatMenu')
       .insert([
-        { name: newMenuName, url: newMenuUrl, priority: newMenuPriority }
+        { 
+          name: newMenuName, 
+          url: newMenuUrl, 
+          priority: newMenuPriority,
+          openWindow: newMenuOpenWindow // 추가된 부분
+        }
       ]);
     if (error) {
       console.error('Failed to add menu item:', error.message);
@@ -81,6 +89,7 @@ export default function AiWebChatMenuPage() {
       setNewMenuName('');
       setNewMenuUrl('');
       setNewMenuPriority(1);
+      setNewMenuOpenWindow(false); // 추가된 부분
     }
     setLoading(false);
   };
@@ -102,6 +111,7 @@ export default function AiWebChatMenuPage() {
               <th>이름</th>
               <th>URL</th>
               <th>우선순위</th>
+              <th>새 창</th> {/* 추가된 부분 */}
               <th>수정</th>
               <th>삭제</th>
             </tr>
@@ -112,6 +122,7 @@ export default function AiWebChatMenuPage() {
                 <td>{selectedMenuId === item.id ? <input type="text" value={selectedMenuName} onChange={(e) => setSelectedMenuName(e.target.value)} /> : item.name}</td>
                 <td>{selectedMenuId === item.id ? <input type="text" value={selectedMenuUrl} onChange={(e) => setSelectedMenuUrl(e.target.value)} /> : item.url}</td>
                 <td>{selectedMenuId === item.id ? <input type="number" value={selectedMenuPriority} onChange={(e) => setSelectedMenuPriority(Number(e.target.value))} /> : item.priority}</td>
+                <td>{selectedMenuId === item.id ? <input type="checkbox" checked={selectedMenuOpenWindow} onChange={(e) => setSelectedMenuOpenWindow(e.target.checked)} /> : item.openWindow ? "예" : "아니요"}</td> {/* 추가된 부분 */}
                 <td>
                   {selectedMenuId === item.id ? (
                     <button onClick={updateMenuItem}>저장</button>
@@ -121,6 +132,7 @@ export default function AiWebChatMenuPage() {
                       setSelectedMenuName(item.name);
                       setSelectedMenuUrl(item.url);
                       setSelectedMenuPriority(item.priority);
+                      setSelectedMenuOpenWindow(item.openWindow); // 추가된 부분
                     }}>수정</button>
                   )}
                 </td>
@@ -160,6 +172,16 @@ export default function AiWebChatMenuPage() {
             type="number"
             value={newMenuPriority}
             onChange={(e) => setNewMenuPriority(Number(e.target.value))}
+            className="shadow py-2 px-3 border"
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="block font-bold mb-1">새 창</label> {/* 추가된 부분 */}
+          <input
+            type="checkbox"
+            checked={newMenuOpenWindow}
+            onChange={(e) => setNewMenuOpenWindow(e.target.checked)}
             className="shadow py-2 px-3 border"
           />
         </div>
