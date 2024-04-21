@@ -12,6 +12,13 @@ CREATE TABLE "AiWebChatSetting" (
 CREATE TABLE "AiWebChatMenu" (
     "id"    serial primary key,
     "name"  VARCHAR(255) not null,
-    "url"  VARCHAR(255) not null,
+    "url"  VARCHAR(255) DEFAULT '',
+    "openWindow" BOOLEAN DEFAULT FALSE,
+    "priority"  int DEFAULT 1
+);
+
+CREATE TABLE "AiWebChatExample" (
+    "id"    serial primary key,
+    "name"  VARCHAR(255) not null,
     "priority"  int DEFAULT 1
 );
