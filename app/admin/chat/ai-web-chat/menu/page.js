@@ -10,11 +10,11 @@ export default function AiWebChatMenuPage() {
   const [selectedMenuName, setSelectedMenuName] = useState('');
   const [selectedMenuUrl, setSelectedMenuUrl] = useState('');
   const [selectedMenuPriority, setSelectedMenuPriority] = useState(1);
-  const [selectedMenuOpenWindow, setSelectedMenuOpenWindow] = useState(false); // 추가된 부분
+  const [selectedMenuOpenWindow, setSelectedMenuOpenWindow] = useState(true); // 추가된 부분
   const [newMenuName, setNewMenuName] = useState('');
   const [newMenuUrl, setNewMenuUrl] = useState('');
   const [newMenuPriority, setNewMenuPriority] = useState(1);
-  const [newMenuOpenWindow, setNewMenuOpenWindow] = useState(false); // 추가된 부분
+  const [newMenuOpenWindow, setNewMenuOpenWindow] = useState(true); // 추가된 부분
   const [loading, setLoading] = useState(false);
 
   const fetchMenus = async () => {
