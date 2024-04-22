@@ -2,7 +2,7 @@ CREATE TABLE "ApiSetting" (
     "id"    serial primary key,
     "apiUrl" VARCHAR(255) DEFAULT '',
     "notRegisteredApiOutput" TEXT DEFAULT '{"status": "OK"}'
-    "useNotRegisteredApiMessageLog" BOOLEAN DEFAULT FALSE
+    "useMessageLog" BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE "ApiMessageLog" (
