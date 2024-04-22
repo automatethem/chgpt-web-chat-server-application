@@ -78,6 +78,7 @@ export default function Page() {
       <table className="mb-3">
         <thead>
           <tr>
+            <th>명령</th>
             <th>메시지</th>
             <th>날짜</th>
           </tr>
@@ -85,6 +86,7 @@ export default function Page() {
         <tbody>
           {apiMessageLogs.map((log) => (
             <tr key={log.id}>
+              <td>{log.command}</td>
               <td>{log.message}</td>
               <td>{new Date(log.date).toLocaleString()}</td>
             </tr>
