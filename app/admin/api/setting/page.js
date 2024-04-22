@@ -7,6 +7,8 @@ const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.
 export default function Page() {
   const [id, setId] = useState(null);
   const [apiUrl, setApiUrl] = useState('');
+  const [notRegisteredApiOutput, setNotRegisteredApiOutput] = useState({ status: "OK" });
+  const [useNotRegisteredApiMessageLog, setUseNotRegisteredApiMessageLog] = useState(false); 
   const [loading, setLoading] = useState(true);
 
   const fetchSettings = async () => {
@@ -18,10 +20,14 @@ export default function Page() {
     if (!error) {
       const {
         id,
-        apiUrl
+        apiUrl,
+        notRegisteredApiOutput,
+	useNotRegisteredApiMessageLog
       } = data;
       setId(id);
       setApiUrl(apiUrl);
+      setNotRegisteredApiOutput(notRegisteredApiOutput);
+      setUseNotRegisteredApiMessageLog(useNotRegisteredApiMessageLog);
     }
     setLoading(false);
   };
@@ -36,7 +42,9 @@ export default function Page() {
     const { data, error } = await supabase
       .from('ApiSetting')
       .update({
-        apiUrl: apiUrl
+        apiUrl: apiUrl,
+        notRegisteredApiOutput: notRegisteredApiOutput,
+	useNotRegisteredApiMessageLog: useNotRegisteredApiMessageLog
       })
       .match({ id: id });
 
@@ -71,7 +79,27 @@ export default function Page() {
           className="w-full shadow py-2 px-3 border"
         />
       </div>
-            
+
+      <div className="mb-3">
+        <label className="block font-bold mb-1">미등록 api 출력</label>
+	<a href={`${apiUrl}/api/command?command=test&key=123&q=AI`} target="_blank">{`${apiUrl}/api/command?command=test&key=123&q=AI`}</a> 접속시 출력
+        <textarea
+          value={notRegisteredApiOutput} 
+          onChange={(e) => setNotRegisteredApiOutput(e.target.value)}
+          className="w-full shadow py-2 px-3 border h-72"
+        />
+      </div> 
+
+      <div className="mb-3">
+        <label className="block font-bold mb-1">미등록 api 메시지 로그 사용</label>
+        <input
+          type="checkbox"
+          checked={useNotRegisteredApiMessageLog}
+          onChange={(e) => setUseNotRegisteredApiMessageLog(e.target.checked)}
+          className="mr-2"
+        />
+      </div>
+		  
       <button
         type="submit"
         className="shadow py-2 px-3 border bg-blue-500"
