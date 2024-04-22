@@ -1,4 +1,12 @@
 CREATE TABLE "ApiSetting" (
     "id"    serial primary key,
-    "apiUrl" TEXT DEFAULT ''
+    "apiUrl" VARCHAR(255) DEFAULT '',
+    "notRegisteredApiOutput" TEXT DEFAULT '{"status": "OK"}'
+    "useNotRegisteredApiMessageLog" BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE "ApiMessageLog" (
+    "id"    serial primary key,
+    "message" TEXT DEFAULT '',
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
