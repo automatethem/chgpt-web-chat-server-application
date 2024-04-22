@@ -38,8 +38,8 @@ const Page = () => {
   <li>
     <h2 className="menu-title"><a href="/admin/api">Api 관리</a></h2>
     <ul>
-        <li><a href="/admin/api/message-log">미등록 api 메시지 로그</a></li>
         <li><a href="/admin/api/setting">설정</a></li>
+        <li><a href="/admin/api/message-log">미등록 api 메시지 로그</a></li>
     </ul>
   </li>
 </ul>
