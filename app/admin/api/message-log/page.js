@@ -80,6 +80,7 @@ export default function Page() {
           <tr>
             <th>명령</th>
             <th>메시지</th>
+            <th>응답</th>
             <th>날짜</th>
           </tr>
         </thead>
@@ -88,6 +89,7 @@ export default function Page() {
             <tr key={log.id}>
               <td>{log.command}</td>
               <td>{log.message}</td>
+              <td>{log.reply}</td>
               <td>{new Date(log.date).toLocaleString()}</td>
             </tr>
           ))}

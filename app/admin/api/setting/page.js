@@ -62,16 +62,6 @@ export default function Page() {
       <p className="mb-3 text-lg font-bold">Api 관리 &gt; 설정</p>
 
       <div className="mb-3">
-        <label className="block font-bold mb-1">메시지 로그 사용</label>
-        <input
-          type="checkbox"
-          checked={useMessageLog}
-          onChange={(e) => setUseMessageLog(e.target.checked)}
-          className="mr-2"
-        />
-      </div>
-
-      <div className="mb-3">
         <label className="block font-bold mb-1">Api Url (웹 사이트 주소)</label>
 	<p>Vercel 무료 웹 호스팅을 사용하는 경우 Vercel 인증 비활성화</p>
         <img src="/admin/api/setting/1.png"/><br/>
@@ -85,7 +75,17 @@ export default function Page() {
           className="w-full shadow py-2 px-3 border"
         />
       </div>
-	  
+
+      <div className="mb-3">
+        <label className="block font-bold mb-1">메시지 로그 사용</label>
+        <input
+          type="checkbox"
+          checked={useMessageLog}
+          onChange={(e) => setUseMessageLog(e.target.checked)}
+          className="mr-2"
+        />
+      </div>
+		  
       <button
         type="submit"
         className="shadow py-2 px-3 border bg-blue-500"
