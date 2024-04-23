@@ -7,7 +7,6 @@ const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.
 export default function Page() {
   const [id, setId] = useState(null);
   const [apiUrl, setApiUrl] = useState('');
-  const [notRegisteredApiOutput, setNotRegisteredApiOutput] = useState({ status: "OK" });
   const [useMessageLog, setUseMessageLog] = useState(false); 
   const [loading, setLoading] = useState(true);
 
@@ -21,13 +20,11 @@ export default function Page() {
       const {
         id,
         apiUrl,
-        notRegisteredApiOutput,
 	useMessageLog
       } = data;
       setId(id);
       setApiUrl(apiUrl);
-      setNotRegisteredApiOutput(notRegisteredApiOutput);
-      setMessageLog(useMessageLog);
+      setUseMessageLog(useMessageLog);
     }
     setLoading(false);
   };
@@ -43,7 +40,6 @@ export default function Page() {
       .from('ApiSetting')
       .update({
         apiUrl: apiUrl,
-        notRegisteredApiOutput: notRegisteredApiOutput,
 	useMessageLog: useMessageLog
       })
       .match({ id: id });
@@ -64,15 +60,6 @@ export default function Page() {
   return (
     <div>
       <p className="mb-3 text-lg font-bold">Api 관리 &gt; 설정</p>
-
-      <div className="mb-3">
-        <label className="block font-bold mb-1">미등록 api 출력</label>
-	<textarea
-          value={notRegisteredApiOutput} 
-          onChange={(e) => setNotRegisteredApiOutput(e.target.value)}
-          className="w-full shadow py-2 px-3 border h-72"
-        />
-      </div> 
 
       <div className="mb-3">
         <label className="block font-bold mb-1">메시지 로그 사용</label>
