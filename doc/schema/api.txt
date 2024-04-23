@@ -6,6 +6,8 @@ CREATE TABLE "ApiSetting" (
 
 CREATE TABLE "ApiMessageLog" (
     "id"    serial primary key,
+    "command" VARCHAR(255) DEFAULT '',
     "message" TEXT DEFAULT '',
+    "reply" TEXT DEFAULT '',
     "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
