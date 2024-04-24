@@ -17,6 +17,7 @@ import createSupabaseRetrieverTool from "./langchain-agent-tools/supabase-retrie
 import createCoinPriceTool from "./langchain-agent-tools/coin-price-tool.js"
 import createWebbrowserTool from "./langchain-agent-tools/webbrowser-tool.js"
 import createTavilysearchTool from "./langchain-agent-tools/tavilysearch-tool.js"
+import createChatgptPluginAsyncTool from "./langchain-agent-tools/chatgpt-plugin-async-tool.js"
 import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY);
@@ -66,6 +67,14 @@ export async function POST(request) {
               queryName: 'match_documents'
           });
           tools.push(tool);
+
+          const { data: aiChatgptPlugins } = await supabase
+          .from('AiChatgptPlugin')
+          .select('*');
+          for (const aiChatgptPlugin of aiChatgptPlugins) {
+            const tool = await createChatgptPluginAsyncTool({ url: aiChatgptPlugin.url });
+            tools.push(tool);
+          }
           
           langchainAgentHandler = new LangchainAgentHandler({prompt, modelName: aiSetting.openaiModelName, tools}); 
         //}
