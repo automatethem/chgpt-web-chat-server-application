@@ -32,3 +32,9 @@ CREATE TABLE "AiRagFile" (
     "fileName" VARCHAR(255),
     "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE "AiChatgptPlugin" (
+    "id"    serial primary key,
+    "url" VARCHAR(255),
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
