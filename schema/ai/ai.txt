@@ -1,0 +1,49 @@
+CREATE TABLE "AiSetting" (
+    "id"    serial primary key,
+    "useAi" BOOLEAN DEFAULT FALSE,
+    "systemPrompt" TEXT DEFAULT '당신은 도우미 챗봇 입니다.',
+    "useOpenai" BOOLEAN DEFAULT FALSE,
+    "openaiModelName" VARCHAR(255) DEFAULT 'gpt-3.5-turbo',
+    "openaiApiKey" VARCHAR(255) DEFAULT 'sk-111111111111111111111111111111111111111111111111',
+    "useCoinPriceTool" BOOLEAN DEFAULT FALSE,
+    "useTavilysearchTool" BOOLEAN DEFAULT FALSE,
+    "tavilysearchToolApiKey" VARCHAR(255) DEFAULT 'tvly-11111111111111111111111111111111',
+    "useWebbrowserTool" BOOLEAN DEFAULT FALSE,
+    "useMessageLog" BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE "AiMessageLog" (
+    "id"    serial primary key,
+    "message" TEXT DEFAULT '',
+    "reply" TEXT DEFAULT '',
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE "AiRagText" (
+    "id"    serial primary key,
+    "title" VARCHAR(255) DEFAULT '',
+    "message" TEXT DEFAULT '',
+    "vectorize" BOOLEAN DEFAULT TRUE,
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE "AiRagFile" (
+    "id"    serial primary key,
+    "fileName" VARCHAR(255),
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE "AiTool" (
+    "id"    serial primary key,
+    "name" VARCHAR(255),
+    "use" BOOLEAN DEFAULT TRUE,
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE "AiChatgptPlugin" (
+    "id"    serial primary key,
+    "name" VARCHAR(255),
+    "url" VARCHAR(255),
+    "use" BOOLEAN DEFAULT TRUE,
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
