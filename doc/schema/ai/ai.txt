@@ -33,8 +33,17 @@ CREATE TABLE "AiRagFile" (
     "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE "AiTool" (
+    "id"    serial primary key,
+    "name" VARCHAR(255),
+    "use" BOOLEAN DEFAULT TRUE,
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE "AiChatgptPlugin" (
     "id"    serial primary key,
+    "name" VARCHAR(255),
     "url" VARCHAR(255),
+    "use" BOOLEAN DEFAULT TRUE,
     "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
