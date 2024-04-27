@@ -19,6 +19,7 @@ import createWebbrowserTool from "./langchain-agent-tools/webbrowser-tool.js"
 import createTavilysearchTool from "./langchain-agent-tools/tavilysearch-tool.js"
 import createChatgptPluginAsyncTool from "./langchain-agent-tools/chatgpt-plugin-async-tool.js"
 import { createClient } from '@supabase/supabase-js'
+import { RequestsGetTool, RequestsPostTool } from "langchain/tools";
 
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY);
 
@@ -41,16 +42,14 @@ export async function POST(request) {
       if (aiSetting.useAi) {
 
         //if (langchainAgentHandler == null) {
-          const systemMessage = aiSetting.systemPrompt;
+          const systemMessagePrompt = aiSetting.systemPrompt;
           const prompt = ChatPromptTemplate.fromMessages([
-              //["system", systemMessage],
-              SystemMessagePromptTemplate.fromTemplate(systemMessage),
-              new MessagesPlaceholder("chat_history"),
-              //["human", "{input}"],
-              HumanMessagePromptTemplate.fromTemplate("{input}"),
-              new MessagesPlaceholder("agent_scratchpad"),
+            ["system", systemMessagePrompt],
+            new MessagesPlaceholder("chat_history"),
+            ["human", "{input}"],
+            new MessagesPlaceholder("agent_scratchpad"),
           ]);
-            
+          
           const tools = [];
         
           if (aiSetting.useCoinPriceTool) 
@@ -68,11 +67,30 @@ export async function POST(request) {
           });
           tools.push(tool);
 
+          ///*
+          const { data: aiTools } = await supabase
+          .from('AiTool')
+          .select('*')
+          .match({ use: true });
+          for (const aiTool of aiTools) {
+            const toolName = aiTool.name; //'gold-man-check-result-tool';
+            const func = require(`./langchain-agent-tools/${toolName}.js`).default;
+            const tool = func();
+            tools.push(tool);
+          }
+          //*/
+
           const { data: aiChatgptPlugins } = await supabase
           .from('AiChatgptPlugin')
-          .select('*');
+          .select('*')
+          .match({ use: true });
+          if(aiChatgptPlugins.length > 0) {
+            tools.push(new RequestsGetTool());
+            tools.push(new RequestsPostTool());
+          }
           for (const aiChatgptPlugin of aiChatgptPlugins) {
             const tool = await createChatgptPluginAsyncTool({ url: aiChatgptPlugin.url });
+            tool.name = aiChatgptPlugin.name;
             tools.push(tool);
           }
           
