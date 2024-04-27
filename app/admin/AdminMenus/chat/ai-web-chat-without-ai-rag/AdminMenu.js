@@ -68,6 +68,15 @@ const Page = () => {
   </li>
 </ul>
     
+<ul className="menu bg-base-200 w-56 rounded-box mb-3">
+  <li>
+    <h2 className="menu-title"><a href="/admin/app/chat-app">메모 관리</a></h2>
+    <ul>
+        <li><a href="/admin/memo">메모 관리</a></li>
+    </ul>
+  </li>
+</ul>
+    
   </>;
 };
 export default Page;
