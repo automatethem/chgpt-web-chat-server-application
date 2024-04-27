@@ -64,8 +64,9 @@ export async function POST(request) {
         const message = text.message;
         const vectorize = text.vectorize;
         if (vectorize) {
-            lines = lines + 'title: \n' + title + '\n\n';
-            lines = lines + 'message: \n' + message + '\n\n';
+            //lines = lines + 'title: \n' + title + '\n\n';
+            //lines = lines + 'message: \n' + message + '\n\n';
+            lines = lines + message + '\n\n';
             lines = lines + '==========\n\n';
         }
     }

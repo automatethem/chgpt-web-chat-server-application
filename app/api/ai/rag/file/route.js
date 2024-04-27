@@ -3,6 +3,8 @@ import { createClient } from "@supabase/supabase-js";
 import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
 import { DirectoryLoader } from "langchain/document_loaders/fs/directory";
 import { TextLoader } from "langchain/document_loaders/fs/text";
+//https://js.langchain.com/docs/integrations/document_loaders/file_loaders/docx
+//npm install mammoth
 import { DocxLoader } from "langchain/document_loaders/fs/docx";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { CSVLoader } from "langchain/document_loaders/fs/csv";
@@ -11,6 +13,7 @@ import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { OpenAIEmbeddings, ChatOpenAI } from "@langchain/openai";
 import { NextRequest, NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
+import fs from "fs";
 
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY);
 
@@ -68,7 +71,10 @@ export async function POST(request) {
     const file = formData.get("files");
     var fileName = file.name;
     //fileName = fileName.replaceAll(" ", "_");
-    const filepath = "/tmp/" + fileName;
+    var filepath = "/tmp/" + fileName;
+    if (!fs.existsSync("/tmp")) {
+        filepath = "./" + fileName;
+    }
     const buffer = Buffer.from(await file.arrayBuffer());
     await writeFile(filepath, buffer);
   
