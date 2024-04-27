@@ -129,7 +129,7 @@ export default function AiRagTextPage() {
     <div>
       <p className="mb-3 text-lg font-bold">Ai 관리 &gt; 검색 증강 생성 관리 (텍스트)</p>
 
-버셀 무료 서버 사용시 데이터 처리 시간이 10 초 이상되면 (타임 아웃) 중지 합니다. 팀 (유료) 전환하거나 PC 에 로컬 웹서버를 띄워 벡터화 버튼을 눌러 텍스트를 벡터화 합니다.
+버셀 무료 서버 사용시 데이터 처리 시간이 10 초 이상되면 (타임 아웃) 중지 합니다. 팀 (유료) 전환하거나 PC 에 로컬 웹서버를 띄워 벡터화 버튼을 눌러 텍스트를 벡터화 합니다.<br/><br/>
       
       <button
         type="button"
@@ -149,7 +149,6 @@ export default function AiRagTextPage() {
         }
         벡터화 하기
       </button>
-
       데이터 수정후 벡터화 하기 버튼을 눌러 주어야 수정된 데이터가 반영 됩니다.
 
       {showAddModal && (
