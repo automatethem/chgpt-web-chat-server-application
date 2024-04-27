@@ -1,0 +1,6 @@
+CREATE TABLE "Memo" (
+    "id"    serial primary key,
+    "title" VARCHAR(255),
+    "message" TEXT DEFAULT '',
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
