@@ -5,7 +5,7 @@ export default function Page() {
 
   return (
     <div>
-      <p className="mb-3 text-lg font-bold">AI 관리 &gt; 파인 튜닝 방법</p>
+      <p className="mb-3 text-lg font-bold">Ai 관리 &gt; 파인 튜닝 방법</p>
 
       <div className="mb-3">
         <a href="https://github.com/automatethem/chatgpt-fine-tuning" target="_blank">https://github.com/automatethem/chatgpt-fine-tuning</a>

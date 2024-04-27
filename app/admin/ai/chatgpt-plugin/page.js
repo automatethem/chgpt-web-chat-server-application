@@ -6,16 +6,17 @@ const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.
 
 export default function Page() {
   const [plugins, setPlugins] = useState([]);
-  const [selectedPluginId, setSelectedPluginId] = useState(null);
-  const [selectedPluginUrl, setSelectedPluginUrl] = useState('');
+  const [selectedPlugin, setSelectedPlugin] = useState(null);
+  const [newPluginName, setNewPluginName] = useState('');
   const [newPluginUrl, setNewPluginUrl] = useState('');
+  const [newPluginUse, setNewPluginUse] = useState(true); 
   const [loading, setLoading] = useState(false);
 
   const fetchPlugins = async () => {
     setLoading(true);
     const { data, error } = await supabase
-    .from('AiChatgptPlugin')
-    .select('*');
+      .from('AiChatgptPlugin')
+      .select('*');
     if (!error) {
       setPlugins(data);
     } else {
@@ -28,13 +29,13 @@ export default function Page() {
     setLoading(true);
     const { error } = await supabase
       .from('AiChatgptPlugin')
-      .update({ url: selectedPluginUrl })
-      .eq('id', selectedPluginId);
+      .update({ name: selectedPlugin.name, url: selectedPlugin.url, use: selectedPlugin.use })
+      .eq('id', selectedPlugin.id);
     if (error) {
       console.error('Failed to update plugin:', error.message);
     } else {
       await fetchPlugins();
-      setSelectedPluginId(null);
+      setSelectedPlugin(null);
     }
     setLoading(false);
   };
@@ -59,13 +60,15 @@ export default function Page() {
   const addPlugin = async () => {
     setLoading(true);
     const { error } = await supabase
-    .from('AiChatgptPlugin')
-    .insert([{ url: newPluginUrl }]);
+      .from('AiChatgptPlugin')
+      .insert([{ name: newPluginName, url: newPluginUrl, use: newPluginUse }]);
     if (error) {
       console.error('Failed to add plugin:', error.message);
     } else {
       await fetchPlugins();
+      setNewPluginName('');
       setNewPluginUrl('');
+      setNewPluginUse(true); // Reset the use flag to default
     }
     setLoading(false);
   };
@@ -85,7 +88,9 @@ export default function Page() {
         <table>
           <thead>
             <tr>
+              <th>이름</th>
               <th>Url</th>
+              <th>사용</th>
               <th>수정</th>
               <th>삭제</th>
             </tr>
@@ -93,15 +98,24 @@ export default function Page() {
           <tbody>
             {plugins.map((plugin) => (
               <tr key={plugin.id}>
-                <td>{selectedPluginId === plugin.id ? <input type="text" value={selectedPluginUrl} onChange={(e) => setSelectedPluginUrl(e.target.value)} /> : plugin.url}</td>
+                <td>{selectedPlugin?.id === plugin.id ? <input type="text" value={selectedPlugin.name} onChange={(e) => setSelectedPlugin({...selectedPlugin, name: e.target.value})} /> : plugin.name}</td>
+                <td>{selectedPlugin?.id === plugin.id ? <input type="text" value={selectedPlugin.url} onChange={(e) => setSelectedPlugin({...selectedPlugin, url: e.target.value})} /> : plugin.url}</td>
                 <td>
-                  {selectedPluginId === plugin.id ? (
+                  {selectedPlugin?.id === plugin.id ? (
+                    <input 
+                      type="checkbox" 
+                      checked={selectedPlugin.use} 
+                      onChange={(e) => setSelectedPlugin({...selectedPlugin, use: e.target.checked})}
+                    />
+                  ) : (
+                    plugin.use ? '사용' : '미사용'
+                  )}
+                </td>
+                <td>
+                  {selectedPlugin?.id === plugin.id ? (
                     <button onClick={updatePlugin}>저장</button>
                   ) : (
-                    <button onClick={() => {
-                      setSelectedPluginId(plugin.id);
-                      setSelectedPluginUrl(plugin.url);
-                    }}>수정</button>
+                    <button onClick={() => setSelectedPlugin({...plugin, use: plugin.use})}>수정</button>
                   )}
                 </td>
                 <td><button onClick={() => deletePlugin(plugin.id)}>삭제</button></td>
@@ -114,11 +128,25 @@ export default function Page() {
       <div>
         <p className="mb-3 text-lg font-bold">추가</p>
         <div className="mb-3">
+          <label className="block font-bold mb-1">이름</label>
+          <input
+            type="text"
+            value={newPluginName}
+            onChange={(e) => setNewPluginName(e.target.value)}
+            className="shadow py-2 px-3 border"
+          />
           <label className="block font-bold mb-1">Url</label>
           <input
             type="text"
             value={newPluginUrl}
             onChange={(e) => setNewPluginUrl(e.target.value)}
+            className="shadow py-2 px-3 border"
+          />
+          <label className="block font-bold mb-1">사용</label>
+          <input
+            type="checkbox"
+            checked={newPluginUse}
+            onChange={(e) => setNewPluginUse(e.target.checked)}
             className="shadow py-2 px-3 border"
           />
         </div>

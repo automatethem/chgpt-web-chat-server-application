@@ -36,11 +36,25 @@ export default function Page() {
     setDeletingId(id);
 
     //DELETE FROM documents WHERE (metadata->'source') = '"/tmp/manual.txt"';
+    ///*
     const { error } = await supabase
       .from('documents')
       .delete()
       .match({ 'metadata->source': '"/tmp/'+fileName+'"' }); 
-
+    const { error: errorDot } = await supabase
+      .from('documents')
+      .delete()
+      .match({ 'metadata->source': '"./'+fileName+'"' }); 
+    //*/
+    /*
+    //x
+    const { error } = await supabase
+      .from('documents')
+      .delete()
+      .match({ 'metadata->source': '"/tmp/'+fileName+'"' })
+      .or(`metadata->source.eq."./${fileName}"`); 
+    */
+    
     const { error: aiRagFileError } = await supabase
       .from('AiRagFile')
       .delete()
@@ -104,8 +118,10 @@ export default function Page() {
 
   return (
     <div>
-      <p className="mb-3 text-lg font-bold">AI 관리 &gt; 검색 증강 생성 관리 (파일)</p>
+      <p className="mb-3 text-lg font-bold">Ai 관리 &gt; 검색 증강 생성 관리 (파일)</p>
 
+버셀 무료 서버 사용시 데이터 처리 시간이 10 초 이상되면 (타임 아웃) 중지 합니다. 팀 (유료) 전환하거나 PC 에 로컬 웹서버를 띄워 파일을 업로드해 파일 내용을 벡터화 합니다.
+    
       <div className="mb-3">
         <table>
           <thead>

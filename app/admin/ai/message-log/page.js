@@ -58,7 +58,7 @@ export default function Page() {
 
   return (
     <div>
-      <p className="mb-3 text-lg font-bold">AI 관리 &gt; 메시지 로그</p>
+      <p className="mb-3 text-lg font-bold">Ai 관리 &gt; 메시지 로그</p>
 
       <div className="mb-3">
         <p>{totalItemsCount} 개의 메시지</p>
