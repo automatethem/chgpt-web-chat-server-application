@@ -1,0 +1,37 @@
+
+
+
+
+CREATE TABLE "WebSiteServiceFreeEarly" (
+    "id"    serial primary key,
+    "title" TEXT,
+    "message" TEXT DEFAULT '',
+    "fileUrl" TEXT DEFAULT '',
+    "serviceId" BIGINT REFERENCES "ServiceWebSiteService"("id") ON DELETE CASCADE,
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+/*
+일반 챗봇을 제작해 드립니다.
+Chatgpt 챗봇을 제작해 드립니다.
+일반 자동화 프로그램을 제작해 드립니다.
+Chatgpt 자동화 프로그램을 제작해 드립니다.
+일반 웹 사이트를 제작해 드립니다.
+중계 플랫폼 웹 사이트를 제작해 드립니다.
+*/
+
+/*
+버킷
+
+WebSiteService
+image
+
+WebSiteServicePortfolio
+image
+
+WebSiteServicePortfolioImage
+image
+
+WebSiteServiceFreeEarly
+file
+*/

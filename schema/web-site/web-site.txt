@@ -1,0 +1,59 @@
+CREATE TABLE "WebSiteMenu" (
+    "id"    serial primary key,
+    "name"  VARCHAR(255) not null,
+    "url"  VARCHAR(255) DEFAULT '',
+    "openWindow" BOOLEAN DEFAULT FALSE,
+    "priority"  int DEFAULT 1
+);
+
+CREATE TABLE "WebSitePage" (
+    "id"    serial primary key,
+    "title" VARCHAR(255),
+    "message" TEXT DEFAULT '',
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE "WebSiteSetting" (
+    "id"    serial primary key,
+    "title" VARCHAR(255),
+    "icon" VARCHAR(255),
+    "header" TEXT DEFAULT '',
+    "footer" TEXT DEFAULT 'Copyright © 20xx Xxx Co. All rights reserved.'
+);
+
+
+---
+
+
+CREATE TABLE "WebSiteService" (
+    "id"    serial primary key,
+    "title" TEXT,
+    "message" TEXT DEFAULT '',
+    "imageUrl" TEXT DEFAULT '',
+    "price" INT DEFAULT 50000,
+    "starCount" INT DEFAULT 0,
+    "commentCount" INT DEFAULT 0,
+    "open" BOOLEAN DEFAULT FALSE,
+    "memberId" VARCHAR(255) UNIQUE,
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE "WebSiteServicePortfolio" (
+    "id"    serial primary key,
+    "title" TEXT,
+    "message" TEXT DEFAULT '',
+    "imageUrl" TEXT DEFAULT '',
+    "open" BOOLEAN DEFAULT FALSE,
+    "serviceId" BIGINT REFERENCES "ServiceWebSiteService"("id") ON DELETE CASCADE,
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE "WebSiteServicePortfolioImage" (
+    "id"    serial primary key,
+    "title" TEXT,
+    "message" TEXT DEFAULT '',
+    "imageUrl" TEXT DEFAULT '',
+    "priority" INT DEFAULT 1,
+    "portfolioId" BIGINT REFERENCES "ServiceWebSiteServicePortfolio"("id") ON DELETE CASCADE,
+    "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
