@@ -26,20 +26,20 @@ const Page = () => {
 
 <ul className="menu bg-base-200 w-56 rounded-box mb-3">
   <li>
-    <h2 className="menu-title"><a href="/admin/ai">AI 관리</a></h2>
-    <ul>
-        <li><a href="/admin/ai/message-log">메시지 로그</a></li>
-        <li><a href="/admin/ai/setting">설정</a></li>
-    </ul>
-  </li>
-</ul>
-
-<ul className="menu bg-base-200 w-56 rounded-box mb-3">
-  <li>
     <h2 className="menu-title"><a href="/admin/api">Api 관리</a></h2>
     <ul>
         <li><a href="/admin/api/message-log">메시지 로그</a></li>
         <li><a href="/admin/api/setting">설정</a></li>
+    </ul>
+  </li>
+</ul>
+  
+<ul className="menu bg-base-200 w-56 rounded-box mb-3">
+  <li>
+    <h2 className="menu-title"><a href="/admin/ai">AI 관리</a></h2>
+    <ul>
+        <li><a href="/admin/ai/message-log">메시지 로그</a></li>
+        <li><a href="/admin/ai/setting">설정</a></li>
     </ul>
   </li>
 </ul>
