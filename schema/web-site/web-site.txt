@@ -26,12 +26,12 @@ CREATE TABLE "WebSiteSetting" (
 
 CREATE TABLE "WebSiteHideHeaderPage" (
     "id"    serial primary key,
-    "page" VARCHAR(255),
+    "page" VARCHAR(255) DEFAULT '/chat/ai-web-chat',
     "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE "WebSiteHideFooterPage" (
     "id"    serial primary key,
-    "page" VARCHAR(255),
+    "page" VARCHAR(255) DEFAULT '/chat/ai-web-chat',
     "date" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
