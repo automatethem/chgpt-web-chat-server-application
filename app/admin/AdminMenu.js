@@ -1,3 +1,3 @@
-import Page from "./AdminMenus/chat/ai-web-chat-without-ai-rag/AdminMenu.js";
+import Page from "./AdminMenus/web-site/AdminMenu.js";
 
 export default Page;
