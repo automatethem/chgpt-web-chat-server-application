@@ -1,12 +1,14 @@
 const Page = () => {
   return <>
- 
+    
 <ul className="menu bg-base-200 w-56 rounded-box mb-3">
   <li>
-    <h2 className="menu-title"><a href="/admin/chat/ai-web-chat">AI 웹 챗 관리</a></h2>
+    <h2 className="menu-title"><a href="/admin/chat/ai-web-chat">Ai 웹 챗 관리</a></h2>
     <ul>
-        <li><a href="/" target="_blank">AI 웹 챗 가기</a></li>
+        <li><a href="/" target="_blank">Ai 웹 챗 가기</a></li>
+        <li><a href="/chat/ai-web-chat" target="_blank">Ai 웹 챗 가기 (전체 창)</a></li>
         <li><a href="/admin/chat/ai-web-chat/menu">메뉴 관리</a></li>
+        <li><a href="/admin/chat/ai-web-chat/example">예제 관리</a></li>
         <li><a href="/admin/chat/ai-web-chat/setting">설정</a></li>
         <li><a href="/admin/chat/ai-web-chat/connect">웹 사이트 연동 방법</a></li>
     </ul>
@@ -33,12 +35,17 @@ const Page = () => {
     </ul>
   </li>
 </ul>
-  
+
 <ul className="menu bg-base-200 w-56 rounded-box mb-3">
   <li>
-    <h2 className="menu-title"><a href="/admin/ai">AI 관리</a></h2>
+    <h2 className="menu-title"><a href="/admin/ai">Ai 관리</a></h2>
     <ul>
         <li><a href="/admin/ai/message-log">메시지 로그</a></li>
+        <li><a href="/admin/ai/rag/text">검색 증강 생성 관리 (텍스트)</a></li>
+        <li><a href="/admin/ai/rag/file">검색 증강 생성 관리 (파일)</a></li>
+        <li><a href="/admin/ai/fine-tuning">파인 튜닝 방법</a></li>
+        <li><a href="/admin/ai/tool">툴 관리</a></li>
+        <li><a href="/admin/ai/chatgpt-plugin">챗지피티 플러그인 관리</a></li>
         <li><a href="/admin/ai/setting">설정</a></li>
     </ul>
   </li>
@@ -53,6 +60,18 @@ const Page = () => {
   </li>
 </ul>
     
+<ul className="menu bg-base-200 w-56 rounded-box mb-3">
+  <li>
+    <h2 className="menu-title"><a href="/admin/web-site">웹 사이트 관리</a></h2>
+    <ul>
+        <li><a href="/admin/web-site/menu">메뉴 관리</a></li>
+        <li><a href="/admin/web-site/page">페이지 관리</a></li>
+        <li><a href="/admin/web-site/service">서비스 관리</a></li>
+        <li><a href="/admin/web-site/setting">설정</a></li>
+    </ul>
+  </li>
+</ul>
+
 <ul className="menu bg-base-200 w-56 rounded-box mb-3">
   <li>
     <h2 className="menu-title"><a href="/admin/server-management">서버 관리</a></h2>
