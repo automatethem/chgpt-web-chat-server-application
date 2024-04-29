@@ -81,7 +81,32 @@ export default function Page() {
 
   return (
     <div>
-      <p className="mb-3 text-lg font-bold">Ai 관리 &gt; 추가 툴 관리</p>
+      <p className="mb-3 text-lg font-bold">Ai 관리 &gt; 툴 관리</p>
+    
+<br/>
+기본 툴 설명
+<br/>
+<br/>
+supabase-retriever-tool<br/>
+<br/>
+webbrowser-tool<br/>
+웹브라우저 툴<br/>
+예) https://www.naver.com 주소의 내용 요약 해줘<br/>
+예) https://www.naver.com 주소에서 링크 주소만 뽑아줘<br/>
+<br/>
+tavilysearch-tool<br/>
+테빌리 서치 툴<br/>
+예) 현재 한국 대통령 알려줘<br/>
+예) 오늘 서울 날씨 알려줘<br/>
+<br/>
+dalle-tool<br/>
+<br/>
+coin-price-tool<br/>
+코인 가격 툴<br/>
+예) 비트 코인 가격 알려줘<br/>
+예) 월드 코인 가격 알려줘<br/>
+<br/>
+    
       <div className="mb-3">
         <table>
           <thead>

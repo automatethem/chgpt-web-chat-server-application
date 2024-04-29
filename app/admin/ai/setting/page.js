@@ -11,10 +11,7 @@ export default function Page() {
   const [useOpenai, setUseOpenai] = useState(false);
   const [openaiModelName, setOpenaiModelName] = useState(false);
   const [openaiApiKey, setOpenaiApiKey] = useState('');
-  const [useCoinPriceTool, setUseCoinPriceTool] = useState(false);
-  const [useTavilysearchTool, setUseTavilysearchTool] = useState(false);
   const [tavilysearchToolApiKey, setTavilysearchToolApiKey] = useState('');
-  const [useWebbrowserTool, setUseWebbrowserTool] = useState(false);
   const [useMessageLog, setUseMessageLog] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -32,10 +29,7 @@ export default function Page() {
       	useOpenai,
 	      openaiModelName,
       	openaiApiKey,
-        useCoinPriceTool,
-        useTavilysearchTool,
 	      tavilysearchToolApiKey,
-        useWebbrowserTool,
 	      useMessageLog
       } = data;
       setId(id);
@@ -44,10 +38,7 @@ export default function Page() {
       setUseOpenai(useOpenai);
       setOpenaiModelName(openaiModelName);
       setOpenaiApiKey(openaiApiKey);
-      setUseCoinPriceTool(useCoinPriceTool);
-      setUseTavilysearchTool(useTavilysearchTool);
       setTavilysearchToolApiKey(tavilysearchToolApiKey);
-      setUseWebbrowserTool(useWebbrowserTool);
       setUseMessageLog(useMessageLog);
     }
     setLoading(false);
@@ -68,10 +59,7 @@ export default function Page() {
         useOpenai: useOpenai,
 	      openaiModelName: openaiModelName,
         openaiApiKey: openaiApiKey,
-        useCoinPriceTool: useCoinPriceTool,
-        useTavilysearchTool: useTavilysearchTool,
         tavilysearchToolApiKey: tavilysearchToolApiKey,
-        useWebbrowserTool: useWebbrowserTool,
         useMessageLog: useMessageLog
       })
       .match({ id: id });
@@ -143,39 +131,6 @@ export default function Page() {
           value={openaiApiKey}
           onChange={(e) => setOpenaiApiKey(e.target.value)}
           className="w-full shadow py-2 px-3 border"
-        />
-      </div>
-            
-      <div className="mb-3">
-        <label className="block font-bold mb-1">코인 가격 툴 사용</label>
-	<p>예) 비트 코인 가격 알려줘</p>
-	<p>예) 월드 코인 가격 알려줘</p>
-        <input
-          type="checkbox"
-          checked={useCoinPriceTool}
-          onChange={(e) => setUseCoinPriceTool(e.target.checked)}
-        />
-      </div>
-
-      <div className="mb-3">
-        <label className="block font-bold mb-1">웹브라우저 툴 사용</label>
-	<p>예) https://www.naver.com 주소의 내용 요약 해줘</p>
-	<p>예) https://www.naver.com 주소에서 링크 주소만 뽑아줘</p>
-        <input
-          type="checkbox"
-          checked={useWebbrowserTool}
-          onChange={(e) => setUseWebbrowserTool(e.target.checked)}
-        />
-      </div>
-
-      <div className="mb-3">
-        <label className="block font-bold mb-1">테빌리 서치 툴 사용</label>
-	<p>예) 현재 한국 대통령 알려줘</p>
-	<p>예) 오늘 서울 날씨 알려줘</p>
-        <input
-          type="checkbox"
-          checked={useTavilysearchTool}
-          onChange={(e) => setUseTavilysearchTool(e.target.checked)}
         />
       </div>
 
