@@ -88,23 +88,27 @@ export default function Page() {
 <br/>
 <br/>
 supabase-retriever-tool<br/>
+수파베이스 리트리버 툴<br/>
+예) AI 제작 서비스 소개해 주세요<br/>
 <br/>
 webbrowser-tool<br/>
 웹브라우저 툴<br/>
-예) https://www.naver.com 주소의 내용 요약 해줘<br/>
-예) https://www.naver.com 주소에서 링크 주소만 뽑아줘<br/>
+예) https://www.naver.com 주소의 내용 요약해 주세요<br/>
+예) https://www.naver.com 주소에서 링크 주소만 뽑아 주세요<br/>
 <br/>
 tavilysearch-tool<br/>
 테빌리 서치 툴<br/>
-예) 현재 한국 대통령 알려줘<br/>
-예) 오늘 서울 날씨 알려줘<br/>
+예) 현재 한국 대통령 알려 주세요<br/>
+예) 오늘 서울 날씨 알려 주세요<br/>
 <br/>
 dalle-tool<br/>
+달리 툴<br/>
+예) 수영장 그려 주세요<br/>
 <br/>
 coin-price-tool<br/>
 코인 가격 툴<br/>
-예) 비트 코인 가격 알려줘<br/>
-예) 월드 코인 가격 알려줘<br/>
+예) 비트 코인 가격 알려 주세요<br/>
+예) 월드 코인 가격 알려 주세요<br/>
 <br/>
     
       <div className="mb-3">
