@@ -1,7 +1,7 @@
 //import { Inter } from 'next/font/google'
 import { Poppins } from "next/font/google";
 import './globals.css'
-import Menu from './Menu';
+import Header from './Header';
 import Footer from './Footer';
 
 //const inter = Inter({ subsets: ['latin'] })
@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       {/*<body className={inter.className}>{children}</body>*/}
       <body className={poppins.className}>
         <div>
-          <div><Menu/></div>
+          <div><Header/></div>
           <div className="ml-3">{children}</div>
           <div className="ml-3 mr-3"><Footer/></div>
         </div>
