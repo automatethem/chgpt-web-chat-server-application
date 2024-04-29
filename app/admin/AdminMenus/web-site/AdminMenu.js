@@ -3,6 +3,20 @@ const Page = () => {
     
 <ul className="menu bg-base-200 w-56 rounded-box mb-3">
   <li>
+    <h2 className="menu-title"><a href="/admin/web-site">웹 사이트 관리</a></h2>
+    <ul>
+        <li><a href="/admin/web-site/menu">메뉴 관리</a></li>
+        <li><a href="/admin/web-site/page">페이지 관리</a></li>
+        <li><a href="/admin/web-site/hide-header-page">헤더 페이지 숨김 관리</a></li>
+        <li><a href="/admin/web-site/hide-footer-page">푸터 페이지 숨김 관리</a></li>
+        <li><a href="/admin/web-site/service">서비스 관리</a></li>
+        <li><a href="/admin/web-site/setting">설정</a></li>
+    </ul>
+  </li>
+</ul>
+
+<ul className="menu bg-base-200 w-56 rounded-box mb-3">
+  <li>
     <h2 className="menu-title"><a href="/admin/chat/ai-web-chat">Ai 웹 챗 관리</a></h2>
     <ul>
         <li><a href="/chat/ai-web-chat" target="_blank">Ai 웹 챗 가기</a></li>
@@ -56,20 +70,6 @@ const Page = () => {
     <h2 className="menu-title"><a href="/admin/web-site-member">웹 사이트 회원 관리</a></h2>
     <ul>
         <li><a href="/admin/web-site-member/member">회원 관리</a></li>
-    </ul>
-  </li>
-</ul>
-    
-<ul className="menu bg-base-200 w-56 rounded-box mb-3">
-  <li>
-    <h2 className="menu-title"><a href="/admin/web-site">웹 사이트 관리</a></h2>
-    <ul>
-        <li><a href="/admin/web-site/menu">메뉴 관리</a></li>
-        <li><a href="/admin/web-site/page">페이지 관리</a></li>
-        <li><a href="/admin/web-site/hide-header-page">헤더 페이지 숨김 관리</a></li>
-        <li><a href="/admin/web-site/hide-footer-page">푸터 페이지 숨김 관리</a></li>
-        <li><a href="/admin/web-site/service">서비스 관리</a></li>
-        <li><a href="/admin/web-site/setting">설정</a></li>
     </ul>
   </li>
 </ul>
