@@ -83,34 +83,6 @@ export default function Page() {
     <div>
       <p className="mb-3 text-lg font-bold">Ai 관리 &gt; 툴 관리</p>
     
-<br/>
-기본 툴 설명
-<br/>
-<br/>
-supabase-retriever-tool<br/>
-수파베이스 리트리버 툴<br/>
-예) AI 제작 서비스 소개해 주세요<br/>
-<br/>
-webbrowser-tool<br/>
-웹브라우저 툴<br/>
-예) https://www.naver.com 주소의 내용 요약해 주세요<br/>
-예) https://www.naver.com 주소에서 링크 주소만 뽑아 주세요<br/>
-<br/>
-tavilysearch-tool<br/>
-테빌리 서치 툴<br/>
-예) 현재 한국 대통령 알려 주세요<br/>
-예) 오늘 서울 날씨 알려 주세요<br/>
-<br/>
-dalle-tool<br/>
-달리 툴<br/>
-예) 수영장 그려 주세요<br/>
-<br/>
-coin-price-tool<br/>
-코인 가격 툴<br/>
-예) 비트 코인 가격 알려 주세요<br/>
-예) 월드 코인 가격 알려 주세요<br/>
-<br/>
-    
       <div className="mb-3">
         <table>
           <thead>
@@ -178,6 +150,33 @@ coin-price-tool<br/>
           추가
         </button>
       </div>
+
+      <br/>
+
+      <p className="mb-3 text-lg font-bold">기본 툴 설명</p>
+
+      <div className="mb-3">
+supabase-retriever-tool<br/>
+수파베이스 리트리버 툴<br/>
+예) AI 제작 서비스 소개해 주세요<br/>
+예) AI 포트 폴리오 보여주세요<br/>
+<br/>
+webbrowser-tool<br/>
+웹브라우저 툴<br/>
+예) https://www.naver.com 주소의 내용 요약해 주세요<br/>
+예) https://www.naver.com 주소에서 링크 주소만 뽑아 주세요<br/>
+<br/>
+tavilysearch-tool<br/>
+테빌리 서치 툴<br/>
+예) 현재 한국 대통령 알려 주세요<br/>
+예) 오늘 서울 날씨 알려 주세요<br/>
+<br/>
+dalle-tool<br/>
+달리 툴<br/>
+예) 호박이 열리는 나무를 그려 주세요<br/>
+예) 눈 내리는 사막을 그려 주세요
+      </div>
+            
     </div>
   );
 }
