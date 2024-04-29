@@ -5,10 +5,7 @@ CREATE TABLE "AiSetting" (
     "useOpenai" BOOLEAN DEFAULT FALSE,
     "openaiModelName" VARCHAR(255) DEFAULT 'gpt-3.5-turbo',
     "openaiApiKey" VARCHAR(255) DEFAULT 'sk-111111111111111111111111111111111111111111111111',
-    "useCoinPriceTool" BOOLEAN DEFAULT FALSE,
-    "useTavilysearchTool" BOOLEAN DEFAULT FALSE,
     "tavilysearchToolApiKey" VARCHAR(255) DEFAULT 'tvly-11111111111111111111111111111111',
-    "useWebbrowserTool" BOOLEAN DEFAULT FALSE,
     "useMessageLog" BOOLEAN DEFAULT FALSE
 );
 
