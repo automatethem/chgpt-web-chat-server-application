@@ -47,11 +47,11 @@ export default function Page() {
   return (
 
       <div>
-        <p className="mb-3 text-lg font-bold">AI 웹 챗 관리 &gt; 웹 사이트 연동 방법</p>
+        <p className="mb-3 text-lg font-bold">Ai 웹 챗 관리 &gt; 웹 사이트 연동 방법</p>
     
         <div className="mb-3">
           <p className="block font-bold mb-1">붙여 넣을 코드</p>
-          아래 코드를 아래 코드를 html 파일내에 복사해 붙여 넣습니다. <a href='/chat/ai-web-chat/widget-example.html' target='_blank'>html 파일에 적용 예</a><br/> 
+          아래 코드를 아래 코드를 푸터 (웹 사이트 공통) html 파일내에 복사해 붙여 넣습니다. <a href='/chat/ai-web-chat/widget-example.html' target='_blank'>html 파일에 적용 예</a><br/> 
           <xmp className="border-2">{`<script src="${connectApiUrl}/chat/ai-web-chat/widget.js"></script>
 <script>
   window.onload = function () {
@@ -62,7 +62,7 @@ export default function Page() {
 
         <div className="mb-3">
           <p className="block font-bold mb-1">붙여 넣을 코드 (Nextjs)</p>
-	  Nextjs 의 경우 아래 코드를 js 파일내에 복사해 붙여 넣습니다.<br/>
+	  Nextjs 의 경우 아래 코드를 푸터 (웹 사이트 공통) js 파일내에 복사해 붙여 넣습니다.<br/>
           <xmp className="border-2">{`"use client";
 import React, { useState, useEffect } from 'react';
 import Script from 'next/script'
