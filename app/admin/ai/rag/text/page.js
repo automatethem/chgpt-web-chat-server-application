@@ -129,8 +129,8 @@ export default function AiRagTextPage() {
     <div>
       <p className="mb-3 text-lg font-bold">Ai 관리 &gt; 검색 증강 생성 관리 (텍스트)</p>
 
-버셀 무료 서버 사용시 데이터 처리 시간이 10 초 이상되면 (타임 아웃) 중지 합니다. 팀 (유료) 전환하거나 PC 에 로컬 웹서버를 띄워 벡터화 버튼을 눌러 텍스트를 벡터화 합니다.<br/><br/>
-      
+버셀 무료 서버 사용시 데이터 처리 시간이 10 초 이상되면 (타임 아웃) 벡터화가 중지 됩니다. 버셀 팀 (유료) 전환하거나 PC 에 로컬 웹 서버를 띄워 거기에 접속해 벡터화 합니다.<br/><br/>
+ 
       <button
         type="button"
         className="mb-3 shadow py-2 px-3 border bg-blue-500"
