@@ -15,7 +15,8 @@ const Page = () => {
   const [icon, setIcon] = useState('');
   const [webSiteInformation, setWebSiteInformation] = useState('');
   //
-  const [hideHeaderPages, setHideHeaderPages] = useState([]);
+//  const [hideHeaderPages, setHideHeaderPages] = useState([]);
+  const [useForwardToAiWebChatFromHome, setUseForwardToAiWebChatFromHome] = useState(false);
   //
   const [loading, setLoading] = useState(true);
   
@@ -54,7 +55,8 @@ const Page = () => {
       setIcon(webSiteSettingData.icon);
       setWebSiteInformation(webSiteSettingData.webSiteInformation);
     }
-    
+
+    /*
     const { data: webSiteHideHeaderPages } = await supabase
     .from('WebSiteHideHeaderPage')
     .select('*');
@@ -63,6 +65,17 @@ const Page = () => {
       temp.push(webSiteHideHeaderrPage.page);
     }
     setHideHeaderPages(temp);
+    */
+    const { data: aiWebChatSetting, error: aiWebChatSettingError } = await supabase
+      .from('AiWebChatSetting')
+      .select('*')
+      .single();
+    if (!aiWebChatSettingError) {
+      const {
+        useForwardToAiWebChatFromHome
+      } = aiWebChatSetting;
+      setUseForwardToAiWebChatFromHome(useForwardToAiWebChatFromHome);
+    }
 
     setLoading(false);
   }, []);
@@ -76,10 +89,16 @@ const Page = () => {
   if (loading)
     return <>loading</>;
 
+/*
   //if (['/chat/ai-web-chat'].includes(window.location.pathname)) 
   if (hideHeaderPages.includes(window.location.pathname)) 
     return null;
-
+*/
+  if (window.location.pathname == '/chat/ai-web-chat') 
+    return null;  
+  if (useForwardToAiWebChatFromHome && window.location.pathname == '/') 
+    return null;  
+      
   return (
     <>
     <div className="navbar bg-base-100">

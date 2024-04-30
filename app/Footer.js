@@ -12,7 +12,10 @@ const Page = () => {
   const [icon, setIcon] = useState('');
   const [webSiteInformation, setWebSiteInformation] = useState('');
   //
-  const [hideFooterPages, setHideFooterPages] = useState([]);
+  const [useHomeChatBox, setUseHomeChatBox] = useState(false);
+  const [useForwardToAiWebChatFromHome, setUseForwardToAiWebChatFromHome] = useState(false);
+  //
+//  const [hideFooterPages, setHideFooterPages] = useState([]);
   //
   const [loading, setLoading] = useState(true);
 
@@ -30,7 +33,21 @@ const Page = () => {
       setIcon(data.icon);
       setWebSiteInformation(data.webSiteInformation);
     }
-    
+
+    const { data: aiWebChatSetting, error: aiWebChatSettingError } = await supabase
+      .from('AiWebChatSetting')
+      .select('*')
+      .single();
+    if (!aiWebChatSettingError) {
+      const {
+        useHomeChatBox,
+        useForwardToAiWebChatFromHome
+      } = aiWebChatSetting;
+      setUseHomeChatBox(useHomeChatBox);
+      setUseForwardToAiWebChatFromHome(useForwardToAiWebChatFromHome);
+    }
+
+   /*
     const { data: webSiteHideFooterPages } = await supabase
     .from('WebSiteHideFooterPage')
     .select('*');
@@ -39,21 +56,29 @@ const Page = () => {
       temp.push(webSiteHideFooterPage.page);
     }
     setHideFooterPages(temp);
-
+*/
+   
     setLoading(false);
   }, []);
 
   if (loading)
     return <>loading</>;
 
+/*
   //if (['/chat/ai-web-chat'].includes(window.location.pathname)) 
   if (hideFooterPages.includes(window.location.pathname)) 
     return null;
-
+*/
+  if (window.location.pathname == '/chat/ai-web-chat') 
+    return null;  
+  if (useForwardToAiWebChatFromHome && window.location.pathname == '/') 
+    return null;
+     
   return (
     <>
       <hr class="mb-2"/>
       <div class="flex flex-col justify-center items-center" dangerouslySetInnerHTML={{ __html: webSiteInformation }}></div>
+{ useHomeChatBox ? 
       <Script 
         src="/chat/ai-web-chat/widget.js"
         onLoad={() => {
@@ -61,6 +86,9 @@ const Page = () => {
         }}
       >
       </Script>
+      :
+      null
+}
     </>
   );
 };
