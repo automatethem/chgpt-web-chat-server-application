@@ -1,5 +1,5 @@
 {
-  "name": "chgpt-web-chat-server-app",
+  "name": "chgpt-ai-web-chat-server-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {   
@@ -7,12 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint"  
-  },  
+  }, 
   "dependencies": {
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "next": "14.1.0",
-    "concurrently": "^8.1.0",
 
     "@supabase/supabase-js": "^2.39.3",
     "@supabase/ssr": "^0.1.0",
@@ -27,7 +26,6 @@
     "iconv-lite": "^0.6.3",
     "cheerio": "^1.0.0-rc.12",
     "openai": "^4.20.1",
-    "dotenv": "^16.3.1",
     "socks-proxy-agent": "^8.0.2",
 
     "langchain": "^0.1.2",
