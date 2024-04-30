@@ -6,8 +6,6 @@ CREATE TABLE "AdminSetting" (
     <ul>
         <li><a href="/admin/web-site/menu">메뉴 관리</a></li>
         <li><a href="/admin/web-site/page">페이지 관리</a></li>
-        <li><a href="/admin/web-site/hide-header-page">헤더 페이지 숨김 관리</a></li>
-        <li><a href="/admin/web-site/hide-footer-page">푸터 페이지 숨김 관리</a></li>
         <li><a href="/admin/web-site/service">서비스 관리</a></li>
         <li><a href="/admin/web-site/setting">설정</a></li>
     </ul>
