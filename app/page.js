@@ -10,7 +10,7 @@ const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.
 const Page = () => {
   const [useForwardToAiWebChatFromHome, setUseForwardToAiWebChatFromHome] = useState(false);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
+  //const router = useRouter();
 
   useEffect(async () => {
     setLoading(true);
