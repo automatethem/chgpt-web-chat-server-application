@@ -1,7 +1,7 @@
 "use client"
 import { createClient } from '@supabase/supabase-js'
 import React, { useState, useEffect } from 'react';
-import AiWebChat from "./chat/ai-web-chat/page.js";
+//import AiWebChat from "./chat/ai-web-chat/page.js";
 
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 
@@ -29,8 +29,10 @@ const Page = () => {
   if (loading)
     return <>loading</>;
 
-  if (useForwardToAiWebChatFromHome) 
+  if (useForwardToAiWebChatFromHome) {
+    const AiWebChat = require("./chat/ai-web-chat/page.js").default;
     return <AiWebChat/>;
+  }
 
   return (
   <>
