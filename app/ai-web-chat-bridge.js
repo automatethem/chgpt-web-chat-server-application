@@ -6,7 +6,6 @@ export default function AiWebChat() {
 ///* 
 import AiWebChat from "./chat/ai-web-chat/page.js";
 export default function Page() {
-  ////const AiWebChat = require("./chat/ai-web-chat/page.js").default;
   return <AiWebChat/>;
 }
 //*/
