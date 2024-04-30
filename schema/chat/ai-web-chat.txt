@@ -1,11 +1,13 @@
 CREATE TABLE "AiWebChatSetting" (
     "id"    serial primary key,
     "useLogoImage" BOOLEAN DEFAULT FALSE,
-    "logoImageUrl" TEXT DEFAULT '',
+    "logoImageUrl" VARCHAR(255) DEFAULT '',
     "useAssistantImage" BOOLEAN DEFAULT FALSE,
-    "assistantImageUrl" TEXT DEFAULT '',
+    "assistantImageUrl" VARCHAR(255) DEFAULT '',
     "useUserImage" BOOLEAN DEFAULT FALSE,
-    "userImageUrl" TEXT DEFAULT '',
+    "userImageUrl" VARCHAR(255) DEFAULT '',
+    "useHomeChatBox" BOOLEAN DEFAULT FALSE,-- 홈에서 챗 박스 사용
+    "useForwardToAiWebChatFromHome" BOOLEAN DEFAULT FALSE,-- 홈에서 Ai 웹 챗으로 포워드 사용
     "useAiWebChat" BOOLEAN DEFAULT TRUE
 );
 
