@@ -8,25 +8,20 @@ export default function Page() {
   const [menus, setMenus] = useState([]);
   const [selectedMenuId, setSelectedMenuId] = useState(null);
   const [selectedMenuName, setSelectedMenuName] = useState('');
-  const [selectedMenuUrl, setSelectedMenuUrl] = useState('');
   const [selectedMenuPriority, setSelectedMenuPriority] = useState(1);
-  const [selectedMenuOpenWindow, setSelectedMenuOpenWindow] = useState(true); // 추가된 부분
   const [newMenuName, setNewMenuName] = useState('');
-  const [newMenuUrl, setNewMenuUrl] = useState('');
   const [newMenuPriority, setNewMenuPriority] = useState(1);
-  const [newMenuOpenWindow, setNewMenuOpenWindow] = useState(true); // 추가된 부분
   const [loading, setLoading] = useState(false);
 
   const fetchMenus = async () => {
     setLoading(true);
     const { data, error } = await supabase
-      .from('AiWebChatMenu')
+      .from('AiWebChatExample') // Changed table name to match schema
       .select('*')
       .order("priority");
     if (!error) {
       setMenus(data);
-    } 
-    else {
+    } else {
       console.error('Failed to fetch menu items:', error.message);
     }
     setLoading(false);
@@ -36,12 +31,10 @@ export default function Page() {
     if (!selectedMenuId) return;
     setLoading(true);
     const { error } = await supabase
-      .from('AiWebChatMenu')
+      .from('AiWebChatExample') // Changed table name to match schema
       .update({
         name: selectedMenuName,
-        url: selectedMenuUrl,
-        priority: selectedMenuPriority,
-        openWindow: selectedMenuOpenWindow // 추가된 부분
+        priority: selectedMenuPriority
       })
       .eq('id', selectedMenuId);
     if (error) {
@@ -59,7 +52,7 @@ export default function Page() {
 
     setLoading(true);
     const { error } = await supabase
-      .from('AiWebChatMenu')
+      .from('AiWebChatExample') // Changed table name to match schema
       .delete()
       .eq('id', id);
     if (error) {
@@ -73,23 +66,16 @@ export default function Page() {
   const addMenuItem = async () => {
     setLoading(true);
     const { error } = await supabase
-      .from('AiWebChatMenu')
+      .from('AiWebChatExample') // Changed table name to match schema
       .insert([
-        { 
-          name: newMenuName, 
-          url: newMenuUrl, 
-          priority: newMenuPriority,
-          openWindow: newMenuOpenWindow // 추가된 부분
-        }
+        { name: newMenuName, priority: newMenuPriority }
       ]);
     if (error) {
       console.error('Failed to add menu item:', error.message);
     } else {
       await fetchMenus();
       setNewMenuName('');
-      setNewMenuUrl('');
       setNewMenuPriority(1);
-      setNewMenuOpenWindow(false); // 추가된 부분
     }
     setLoading(false);
   };
@@ -102,16 +88,14 @@ export default function Page() {
 
   return (
     <div>
-      <p className="mb-3 text-lg font-bold">Ai 웹 챗 관리 &gt; 메뉴 관리</p>
+      <p className="mb-3 text-lg font-bold">Ai 웹 챗 관리 &gt; 예제 관리</p>
 
       <div className="mb-3">
         <table>
           <thead>
             <tr>
               <th>이름</th>
-              <th>URL</th>
               <th>우선순위</th>
-              <th>새 창</th> {/* 추가된 부분 */}
               <th>수정</th>
               <th>삭제</th>
             </tr>
@@ -120,9 +104,7 @@ export default function Page() {
             {menus.map((item) => (
               <tr key={item.id}>
                 <td>{selectedMenuId === item.id ? <input type="text" value={selectedMenuName} onChange={(e) => setSelectedMenuName(e.target.value)} /> : item.name}</td>
-                <td>{selectedMenuId === item.id ? <input type="text" value={selectedMenuUrl} onChange={(e) => setSelectedMenuUrl(e.target.value)} /> : item.url}</td>
                 <td>{selectedMenuId === item.id ? <input type="number" value={selectedMenuPriority} onChange={(e) => setSelectedMenuPriority(Number(e.target.value))} /> : item.priority}</td>
-                <td>{selectedMenuId === item.id ? <input type="checkbox" checked={selectedMenuOpenWindow} onChange={(e) => setSelectedMenuOpenWindow(e.target.checked)} /> : item.openWindow ? "예" : "아니요"}</td> {/* 추가된 부분 */}
                 <td>
                   {selectedMenuId === item.id ? (
                     <button onClick={updateMenuItem}>저장</button>
@@ -130,9 +112,7 @@ export default function Page() {
                     <button onClick={() => {
                       setSelectedMenuId(item.id);
                       setSelectedMenuName(item.name);
-                      setSelectedMenuUrl(item.url);
                       setSelectedMenuPriority(item.priority);
-                      setSelectedMenuOpenWindow(item.openWindow); // 추가된 부분
                     }}>수정</button>
                   )}
                 </td>
@@ -157,31 +137,11 @@ export default function Page() {
         </div>
 
         <div className="mb-3">
-          <label className="block font-bold mb-1">URL</label>
-          <input
-            type="text"
-            value={newMenuUrl}
-            onChange={(e) => setNewMenuUrl(e.target.value)}
-            className="shadow py-2 px-3 border"
-          />
-        </div>
-
-        <div className="mb-3">
           <label className="block font-bold mb-1">우선순위</label>
           <input
             type="number"
             value={newMenuPriority}
             onChange={(e) => setNewMenuPriority(Number(e.target.value))}
-            className="shadow py-2 px-3 border"
-          />
-        </div>
-
-        <div className="mb-3">
-          <label className="block font-bold mb-1">새 창</label> {/* 추가된 부분 */}
-          <input
-            type="checkbox"
-            checked={newMenuOpenWindow}
-            onChange={(e) => setNewMenuOpenWindow(e.target.checked)}
             className="shadow py-2 px-3 border"
           />
         </div>

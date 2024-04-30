@@ -11,7 +11,9 @@ export default function Page() {
   const [useAssistantImage, setUseAssistantImage] = useState(false);
   const [assistantImageUrl, setAssistantImageUrl] = useState('');
   const [useUserImage, setUseUserImage] = useState(false);
-  const [userImageUrl, setUserImageUrl] = useState(true);
+  const [userImageUrl, setUserImageUrl] = useState('');
+  const [useHomeChatBox, setUseHomeChatBox] = useState(false);
+  const [useForwardToAiWebChatFromHome, setUseForwardToAiWebChatFromHome] = useState(false);
   const [useAiWebChat, setUseAiWebChat] = useState(true);
   const [loading, setLoading] = useState(true);
 
@@ -24,13 +26,15 @@ export default function Page() {
     if (!aiWebChatSettingError) {
       const {
         id,
-	      useLogoImage,
+        useLogoImage,
         logoImageUrl,
         useAssistantImage,
-	      assistantImageUrl,
+        assistantImageUrl,
         useUserImage,
-	      userImageUrl,
-        useAiWebChat
+        userImageUrl,
+        useHomeChatBox,
+        useForwardToAiWebChatFromHome,
+        useAiWebChat,
       } = aiWebChatSetting;
       setId(id);
       setUseLogoImage(useLogoImage);
@@ -39,6 +43,8 @@ export default function Page() {
       setAssistantImageUrl(assistantImageUrl);
       setUseUserImage(useUserImage);
       setUserImageUrl(userImageUrl);
+      setUseHomeChatBox(useHomeChatBox);
+      setUseForwardToAiWebChatFromHome(useForwardToAiWebChatFromHome);
       setUseAiWebChat(useAiWebChat);
     }
     setLoading(false);
@@ -54,21 +60,22 @@ export default function Page() {
     const { data: aiWebChatSetting, aiWebChatSettingError } = await supabase
       .from('AiWebChatSetting')
       .update({
-	      useLogoImage: useLogoImage,
-        logoImageUrl: logoImageUrl,
-        useAssistantImage: useAssistantImage,
-        assistantImageUrl: assistantImageUrl,
-        useUserImage: useUserImage,
-	      userImageUrl: userImageUrl,
-        useAiWebChat: useAiWebChat
+        useLogoImage,
+        logoImageUrl,
+        useAssistantImage,
+        assistantImageUrl,
+        useUserImage,
+        userImageUrl,
+        useHomeChatBox,
+        useForwardToAiWebChatFromHome,
+        useAiWebChat
       })
-      .match({ id: id });
+      .match({ id });
 
     if (!aiWebChatSettingError) {
       alert('설정 저장 성공!');
       fetchSettings();
-    } 
-    else {
+    } else {
       alert(aiWebChatSettingError.message);
     }
     setLoading(false);
@@ -154,7 +161,7 @@ export default function Page() {
 
   return (
     <div>
-      <p className="mb-3 text-lg font-bold">AI 웹 챗 관리 &gt; 설정</p>
+      <p className="mb-3 text-lg font-bold">Ai 웹 챗 관리 &gt; 설정</p>
 
       <div className="mb-3">
         <label className="block font-bold mb-1">로고 이미지 사용</label>
@@ -217,6 +224,24 @@ export default function Page() {
       </div>
       
       <div className="mb-3">
+        <label className="block font-bold mb-1">홈에서 챗 박스 사용</label>
+        <input
+          type="checkbox"
+          checked={useHomeChatBox}
+          onChange={(e) => setUseHomeChatBox(e.target.checked)}
+        />
+      </div>
+
+      <div className="mb-3">
+        <label className="block font-bold mb-1">홈에서 Ai 웹 챗으로 포워드 사용</label>
+        <input
+          type="checkbox"
+          checked={useForwardToAiWebChatFromHome}
+          onChange={(e) => setUseForwardToAiWebChatFromHome(e.target.checked)}
+        />
+      </div>
+
+      <div className="mb-3">
         <label className="block font-bold mb-1">AI 웹 챗 사용</label>
         <input
           type="checkbox"
@@ -224,7 +249,7 @@ export default function Page() {
           onChange={(e) => setUseAiWebChat(e.target.checked)}
         />
       </div>
-            
+      
       <button
         type="submit"
         className="shadow py-2 px-3 border bg-blue-500"
