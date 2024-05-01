@@ -193,6 +193,7 @@ export default function WebSitePageManager() {
           <thead>
             <tr>
               <th>제목</th>
+              <th>Url</th>
               <th>수정/삭제</th>
             </tr>
           </thead>
@@ -200,6 +201,7 @@ export default function WebSitePageManager() {
             {pages.map((page) => (
               <tr key={page.id}>
                 <td>{page.title}</td>
+                <td><a href={`/web-site/page/${page.id}`} target='_blank'>/web-site/page/{page.id}</a></td>
                 <td>
                   <button onClick={() => startEdit(page)} className="btn btn-sm btn-success mr-2">수정</button>
                   <button onClick={() => deletePage(page.id)} className="btn btn-sm btn-error">삭제</button>

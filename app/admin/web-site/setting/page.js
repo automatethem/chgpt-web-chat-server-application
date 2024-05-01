@@ -9,6 +9,8 @@ export default function Page() {
   const [title, setTitle] = useState('');
   const [subTitle, setSubTitle] = useState('');
   const [icon, setIcon] = useState('');
+  const [message, setMessage] = useState('');
+  const [privacy, setPrivacy] = useState('');
   const [webSiteInformation, setWebSiteInformation] = useState('');
   const [loading, setLoading] = useState(true);
 
@@ -23,6 +25,8 @@ export default function Page() {
       setTitle(data.title);
       setSubTitle(data.subTitle);
       setIcon(data.icon);
+      setMessage(data.message);
+      setPrivacy(data.privacy);
       setWebSiteInformation(data.webSiteInformation);
     }
     setLoading(false);
@@ -41,6 +45,8 @@ export default function Page() {
         title: title,
         subTitle: subTitle,
         icon: icon,
+        message: message,
+        privacy: privacy,
         webSiteInformation: webSiteInformation
       })
       .match({ id: id });
@@ -92,6 +98,25 @@ export default function Page() {
           />
         </div>
 
+        <div className="mb-3">
+          <label className="block font-bold mb-1">메시지</label>
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className="w-full shadow py-2 px-3 border h-48"
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="block font-bold mb-1">개인정보 취급방침</label>
+          <p><a href="/privacy" target="_blank">개인정보 취급방침 미리 보기</a></p>
+          <textarea
+            value={privacy}
+            onChange={(e) => setPrivacy(e.target.value)}
+            className="w-full shadow py-2 px-3 border h-48"
+          />
+        </div>
+             
         <div className="mb-3">
           <label className="block font-bold mb-1">웹사이트 정보</label>
           <textarea
