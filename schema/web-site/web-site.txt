@@ -19,8 +19,10 @@ CREATE TABLE "WebSiteSetting" (
     "subTitle" VARCHAR(255) DEFAULT '사이트 하위 제목',
     "icon" VARCHAR(255),
     "message" TEXT DEFAULT '홈',
-    "webSiteInformation" TEXT DEFAULT '<p className="text-sm">Abc | (우: 11111) 대구광역시 중구 달구벌대로 111 (남산동, 청라 센트럴파크) 111동 1111호 | 대표: 홍길동 | 개인정보관리책임자: 홍길동</p>
-<p className="text-sm">사업자등록번호: 111-11-11111 | <a href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=1111111111" target="_blank">사업자 등록 번호 확인</a> | 통신판매업신고: 제 1111-대구중구-1111 호</p>
-<p className="text-sm mb-2">고객센터: 010-1111-1111 abc@gmail.com</p>
-<p className="text-xs">Copyright © 2024 Abc Co. All rights reserved.</p>'
+    "webSiteInformation" TEXT DEFAULT '<p class="text-sm"><a href="/web-site/page/1">Abc</a> | (우: 41974) 서울 특별시 abc구 abc대로 1111 | 대표: 홍길도 | 개인정보관리책임자: 홍길동</p>
+        <p class="text-sm">사업자등록번호: 111-11-11111 | <a href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=1111111111" target="_blank">사업자 등록 번호 확인</a> | 통신판매업신고: 제 1111-서울abc구-1111 호 | <a href="privacy" target="_blank">개인정보 취급방침</a></p>
+        <p class="text-sm mb-2">고객센터: 010-1111-1111 abc@gmail.com</p>
+        <p class="text-xs">Copyright © 2024 Abc Co. All rights reserved.</p>',
+    "privacy" TEXT DEFAULT '<p>Privacy policy</p><br/>
+This site / app do not collect personal information.'
 );
