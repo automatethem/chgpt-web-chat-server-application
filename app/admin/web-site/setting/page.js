@@ -8,7 +8,8 @@ export default function Page() {
   const [id, setId] = useState(null);
   const [title, setTitle] = useState('');
   const [subTitle, setSubTitle] = useState('');
-  const [icon, setIcon] = useState('');
+  const [useLogoImage, setUseLogoImage] = useState(false);
+  const [logoImageUrl, setLogoImageUrl] = useState('');
   const [message, setMessage] = useState('');
   const [privacy, setPrivacy] = useState('');
   const [webSiteInformation, setWebSiteInformation] = useState('');
@@ -24,7 +25,8 @@ export default function Page() {
       setId(data.id);
       setTitle(data.title);
       setSubTitle(data.subTitle);
-      setIcon(data.icon);
+      setUseLogoImage(data.useLogoImage);
+      setLogoImageUrl(data.logoImageUrl);
       setMessage(data.message);
       setPrivacy(data.privacy);
       setWebSiteInformation(data.webSiteInformation);
@@ -44,7 +46,8 @@ export default function Page() {
       .update({
         title: title,
         subTitle: subTitle,
-        icon: icon,
+        useLogoImage: useLogoImage,
+        logoImageUrl: logoImageUrl,
         message: message,
         privacy: privacy,
         webSiteInformation: webSiteInformation
@@ -60,6 +63,31 @@ export default function Page() {
     setLoading(false);
   };
 
+  const uploadLogoImageFile = async (event) => {
+    const file = event.target.files[0];
+    const bucket = "WebSiteSetting"
+
+    const { data, error } = await supabase.storage
+      .from(bucket)
+      .upload(`logoImage/${file.name}`, file, { upsert: true });
+
+    if(error) {
+      alert(error.message); //new row violates row-level security policy
+      return;
+    }
+    
+    const { data: dataPublic, error: errorPublic } = supabase
+    .storage
+    .from('WebSiteSetting')
+    .getPublicUrl(`logoImage/${file.name}`);
+    
+    const publicUrl = dataPublic.publicUrl;
+    //console.log(publicUrl); //https://haeojztqgjldkavhpkeo.supabase.co/storage/v1/object/public/welcome/images/googlelogo.png
+    setLogoImageUrl(publicUrl);
+    
+    alert('로고 이미지 업로드 성공!');
+  };
+ 
   if (loading) 
     return <p>Loading...</p>;
 
@@ -89,15 +117,25 @@ export default function Page() {
         </div>
 
         <div className="mb-3">
-          <label className="block font-bold mb-1">아이콘 URL</label>
+          <label className="block font-bold mb-1">로고 이미지 사용</label>
           <input
-            type="text"
-            value={icon}
-            onChange={(e) => setIcon(e.target.value)}
-            className="w-full shadow py-2 px-3 border"
+            type="checkbox"
+            checked={useLogoImage}
+            onChange={(e) => setUseLogoImage(e.target.checked)}
           />
         </div>
-
+  
+        <div className="mb-3">
+          <label className="block font-bold mb-1">로고 이미지</label>
+          <input 
+            type="text"
+            value={logoImageUrl}
+            onChange={(e) => setLogoImageUrl(e.target.value)}
+            className="w-full shadow py-2 px-3 border"
+          />
+          <input type="file" onChange={(e) => {uploadLogoImageFile(e);}} />
+        </div>
+             
         <div className="mb-3">
           <label className="block font-bold mb-1">메시지</label>
           <textarea
