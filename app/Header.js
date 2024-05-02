@@ -12,7 +12,8 @@ const Page = () => {
   const [id, setId] = useState(null);
   const [title, setTitle] = useState('');
   const [subTitle, setSubTitle] = useState('');
-  const [icon, setIcon] = useState('');
+  const [useLogoImage, setUseLogoImage] = useState(false);
+  const [logoImageUrl, setLogoImageUrl] = useState('');
   const [webSiteInformation, setWebSiteInformation] = useState('');
   //
 //  const [hideHeaderPages, setHideHeaderPages] = useState([]);
@@ -52,7 +53,8 @@ const Page = () => {
       setId(webSiteSettingData.id);
       setTitle(webSiteSettingData.title);
       setSubTitle(webSiteSettingData.subTitle);
-      setIcon(webSiteSettingData.icon);
+      setUseLogoImage(webSiteSettingData.useLogoImage);
+      setLogoImageUrl(webSiteSettingData.logoImageUrl);
       setWebSiteInformation(webSiteSettingData.webSiteInformation);
     }
 
@@ -103,9 +105,14 @@ const Page = () => {
     <>
     <div className="navbar bg-base-100">
       <div className="flex-1">
-        <div className="join join-vertical">
-          <a className="btn btn-ghost text-xl" href="/">{title}</a>
-          <p className="text-sm">{subTitle}</p>
+        <div className="flex">
+          <div>
+            <a href="/"><img src={useLogoImage ?logoImageUrl : "/logo.png"} width="80"/></a>
+          </div>
+          <div className="join join-vertical">
+            <a className="btn btn-ghost text-xl" href="/">{title}</a>
+            <p className="text-sm">{subTitle}</p>
+          </div>
         </div>
       </div>
       <div className="flex-none">
