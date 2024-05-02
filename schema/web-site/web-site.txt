@@ -17,7 +17,8 @@ CREATE TABLE "WebSiteSetting" (
     "id"    serial primary key,
     "title" VARCHAR(255) DEFAULT '사이트 제목',
     "subTitle" VARCHAR(255) DEFAULT '사이트 하위 제목',
-    "icon" VARCHAR(255),
+    "useLogoImage" BOOLEAN DEFAULT FALSE,
+    "logoImageUrl" VARCHAR(255),
     "message" TEXT DEFAULT '홈',
     "webSiteInformation" TEXT DEFAULT '<p class="text-sm"><a href="/web-site/page/1">Abc</a> | (우: 41974) 서울 특별시 abc구 abc대로 1111 | 대표: 홍길도 | 개인정보관리책임자: 홍길동</p>
         <p class="text-sm">사업자등록번호: 111-11-11111 | <a href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=1111111111" target="_blank">사업자 등록 번호 확인</a> | 통신판매업신고: 제 1111-서울abc구-1111 호 | <a href="privacy">개인정보 취급방침</a></p>
