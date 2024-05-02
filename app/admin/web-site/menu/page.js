@@ -109,7 +109,7 @@ export default function Page() {
           <thead>
             <tr>
               <th>이름</th>
-              <th>URL</th>
+              <th>Url</th>
               <th>우선순위</th>
               <th>새 창</th> {/* 변경된 부분 */}
               <th>수정</th>
@@ -120,7 +120,7 @@ export default function Page() {
             {menus.map((item) => (
               <tr key={item.id}>
                 <td>{selectedMenuId === item.id ? <input type="text" value={selectedMenuName} onChange={(e) => setSelectedMenuName(e.target.value)} /> : item.name}</td>
-                <td>{selectedMenuId === item.id ? <input type="text" value={selectedMenuUrl} onChange={(e) => setSelectedMenuUrl(e.target.value)} /> : item.url}</td>
+                <td>{selectedMenuId === item.id ? <input type="text" value={selectedMenuUrl} onChange={(e) => setSelectedMenuUrl(e.target.value)} /> : <a href={item.url} target='_blank'>{item.url}</a>}</td>
                 <td>{selectedMenuId === item.id ? <input type="number" value={selectedMenuPriority} onChange={(e) => setSelectedMenuPriority(Number(e.target.value))} /> : item.priority}</td>
                 <td>{selectedMenuId === item.id ? <input type="checkbox" checked={selectedMenuOpenWindow} onChange={(e) => setSelectedMenuOpenWindow(e.target.checked)} /> : item.openWindow ? "예" : "아니요"}</td> {/* 변경된 부분 */}
                 <td>
