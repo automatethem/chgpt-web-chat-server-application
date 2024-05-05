@@ -129,7 +129,7 @@ export default function AiRagTextPage() {
     <div>
       <p className="mb-3 text-lg font-bold">Ai 관리 &gt; 검색 증강 생성 관리 (텍스트)</p>
 
-버셀 무료 서버 사용시 데이터 처리 시간이 10 초 이상되면 (타임 아웃) 벡터화가 중지 됩니다. 버셀 팀 (유료) 전환하거나 PC 에 로컬 웹 서버를 띄워 거기에 접속해 벡터화 합니다.<br/><br/>
+버셀 무료 서버 사용시 데이터 처리 시간이 10 초 일 경우 (타임 아웃) 벡터화가 중지 됩니다. 이럴 경우 버셀 팀 (유료) 전환하거나 PC 에 로컬 웹 서버를 띄워 거기에 접속해 벡터화 합니다.<br/><br/>
  
       <button
         type="button"
@@ -254,6 +254,7 @@ export default function AiRagTextPage() {
               {/*<th>아이디</th>*/}
               <th>제목</th>
               <th>벡터화</th>
+              <th>다운로드</th>
               <th>수정/삭제</th>
             </tr>
           </thead>
@@ -263,6 +264,7 @@ export default function AiRagTextPage() {
                 {/*<td>{text.id}</td>*/}
                 <td>{text.title}</td>
                 <td>{text.vectorize ? '예' : '아니오'}</td>
+                <td><a href={`/api/ai/rag/text/download?id=${text.id}`}>다운로드</a></td>
                 <td>
                   <button onClick={() => startEdit(text)} className="btn btn-sm btn-success mr-2">수정</button>
                   <button onClick={() => deleteAiRagText(text.id)} className="btn btn-sm btn-error">삭제</button>
