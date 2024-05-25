@@ -95,3 +95,6 @@ export async function POST(request) {
 
 //export const runtime = 'nodejs' //디폴트 
 //export const runtime = 'edge'
+
+//export const maxDuration = 10; //디폴트 10초
+export const maxDuration = 60;
