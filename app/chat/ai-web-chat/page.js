@@ -199,6 +199,9 @@ function Page() {
                         a: ({ node, ...props }) => (
                           <a {...props} className="underline" />
                         ),
+                        label: ({ node, ...props }) => {
+                          return <label className="mr-1 mt-1 underline cursor-pointer" onClick={(e) => {handleExampleClick(props.children[0]); }}>{props.children[0]}</label>
+                        },
                         button: ({ node, ...props }) => {
                           return <button className="btn btn-sm mr-1 mt-1" onClick={(e) => {handleExampleClick(props.children[0]); }}>{props.children[0]}</button>
                         },
