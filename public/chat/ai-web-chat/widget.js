@@ -67,11 +67,11 @@
     icon_message: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path></svg>`,
   };
 
-  function intChatInterface(chatKey) {
+  function initChatInterface({apiUrl}) {
     const chatWidget = document.createElement("div");
     chatWidget.id = "chat-widget";
     chatWidget.innerHTML = `
-            <iframe id="chat-frame-widget" src="/chat/ai-web-chat" class="shadow-xl ring-1 rounded-lg" style="display: none; border: none; position: fixed; inset: auto 15px 75px auto; width: 400px; height: 540px; opacity: 1; color-scheme: none; background: white !important; margin: 0px; max-height: 100vh; max-width: 100vw; transform: translateY(0px); transition: none 0s ease 0s !important; visibility: visible; z-index: 999999999 !important;"></iframe>
+            <iframe id="chat-frame-widget" src="${apiUrl?apiUrl:""}/chat/ai-web-chat" class="shadow-xl ring-1 rounded-lg" style="display: none; border: none; position: fixed; inset: auto 15px 75px auto; width: 500px; height: 88%; opacity: 1; color-scheme: none; background: white !important; margin: 0px; max-height: 100vh; max-width: 100vw; transform: translateY(0px); transition: none 0s ease 0s !important; visibility: visible; z-index: 999999999 !important;"></iframe>
             <button id="btn-trigger-chat" class="shadow-xl ring-1">${components.icon_message}</button>
             `;
 
@@ -93,6 +93,6 @@
   }
 
   window.ChatWidget = {
-    init: intChatInterface,
+    init: initChatInterface,
   };
 })();
