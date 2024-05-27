@@ -232,7 +232,7 @@ function Page() {
 displayExamples ? (           
           <div className="w-full max-w-screen-md relative" id="examples">
             {examples.map((example) => {
-              return <button className="btn btn-sm btn-outline mr-1 mt-1" key={example.id} onClick={(e) => {handleExampleClick(example.name); }}>{example.name}</button>
+              return <button className="btn btn-xs mr-1 mt-1" key={example.id} onClick={(e) => {handleExampleClick(example.name); }}>{example.name}</button>
             })}
           </div>
 ) : null
