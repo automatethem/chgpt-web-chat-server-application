@@ -72,7 +72,14 @@ export async function POST(request) {
             const textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: 1000, chunkOverlap: 200 })
   
             const documents = await getDocumentsFromText(message, `text/${id}`, textSplitter)
-        
+
+            //Error: Error inserting: unsupported Unicode escape sequence 400 Bad Request langchain
+            //To resolve this issue, you need to sanitize the content of the PDF before trying to upload it. This could involve removing or replacing any unsupported Unicode escape sequences
+            //https://github.com/langchain-ai/langchainjs/issues/4340#issuecomment-1933814035
+            for (var doc of documents) {
+                doc.pageContent = doc.pageContent.replaceAll('\x00', '');
+            }
+            
             //https://supabase.com/docs/reference/javascript/like
             //DELETE FROM documents WHERE (metadata->'source') = '"text"';
             const { error: documentsError } = await supabase
