@@ -167,7 +167,7 @@ export default function Page() {
           업로드
         </button>
       </div>
-
+지원 확장자: .txt .docx .pdf .csv .json
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 
-export default function AiRagTextPage() {
+export default function Page() {
   const [aiRagTexts, setAiRagTexts] = useState([]);
   const [newText, setNewText] = useState('');
   const [newMessage, setNewMessage] = useState('');
@@ -34,15 +34,24 @@ export default function AiRagTextPage() {
     if (!confirmDelete) return;
 
     setLoading(true);
+
     const { error } = await supabase
       .from('AiRagText')
       .delete()
-      .eq('id', id);
+      .match({ 'id': id });
+
+    const { error: documentsError } = await supabase
+      .from('documents')
+      .delete()
+      .match({ 'metadata->source': `"text/${id}"` }); 
+
     if (error) {
       console.error('Failed to delete text:', error.message);
-    } else {
+    } 
+    else {
       await fetchAiRagTexts();
     }
+
     setLoading(false);
   };
 
@@ -119,6 +128,22 @@ export default function AiRagTextPage() {
     setVectorizing(false);
   };
 
+  const vectorizeItem = async (id) => {
+    setVectorizing(true);
+    
+    const response = await fetch(`/api/ai/rag/text/${id}`, {
+      method: 'POST'
+    });
+  
+    const result = await response.json();
+  
+    if (response.ok) {
+      alert("벡터화 완료");
+    }
+  
+    setVectorizing(false);
+  };
+  
   useEffect(() => {
     fetchAiRagTexts();
   }, []);
@@ -130,7 +155,7 @@ export default function AiRagTextPage() {
       <p className="mb-3 text-lg font-bold">Ai 관리 &gt; 검색 증강 생성 관리 (텍스트)</p>
 
 버셀 무료 웹 호스팅을 사용하는 경우 데이터 처리 시간이 50 초 일 경우 (타임 아웃) 벡터화가 중지 됩니다. 이럴 경우 <a href="https://vercel.com/pricing" target="_blank">버셀 프로 (유료, 타임 아웃 최대 5분, 코드 수정 필요) 로 업그레이드</a> 하거나 <a href="https://render.com/pricing" target="_blank">랜더 유료 웹 호스팅 (타임 아웃 최대 10분, 코드 수정 필요)</a>을 사용 합니다..
-
+<br/>
       <button
         type="button"
         className="mb-3 shadow py-2 px-3 border bg-blue-500"
@@ -144,13 +169,13 @@ export default function AiRagTextPage() {
         className="ml-2 mb-3 shadow py-2 px-3 border bg-blue-500"
         onClick={() => vectorize()}
       >
-        {
-          vectorizing ? (<span className="loading loading-spinner text-primary"></span>) : null
-        }
-        벡터화 하기
+        모두 벡터화
       </button>
-      데이터 수정후 벡터화 하기 버튼을 눌러 주어야 수정된 데이터가 반영 됩니다.
-
+      데이터 수정후 벡터화 혹은 모두 벡터화 버튼을 눌러 주어야 수정된 데이터가 반영 됩니다.
+      {
+        vectorizing ? (<span className="loading loading-spinner text-primary"></span>) : null
+      }
+  
       {showAddModal && (
         <div className="modal modal-open">
           <div className="modal-box">
@@ -180,7 +205,7 @@ export default function AiRagTextPage() {
               </div>
               <div className="mb-2">
                 <label className="label">
-                  <span className="label-text">벡터화</span>
+                  <span className="label-text">모두 벡터화</span>
                 </label>
                 <input
                   type="checkbox"
@@ -229,7 +254,7 @@ export default function AiRagTextPage() {
               </div>
               <div className="mb-2">
                 <label className="label">
-                  <span className="label-text">벡터화</span>
+                  <span className="label-text">모두 벡터화</span>
                 </label>
                 <input
                   type="checkbox"
@@ -253,9 +278,9 @@ export default function AiRagTextPage() {
             <tr>
               {/*<th>아이디</th>*/}
               <th>제목</th>
-              <th>벡터화</th>
+              <th>모두 벡터화</th>
               <th>다운로드</th>
-              <th>수정/삭제</th>
+              <th>벡터화/수정/삭제</th>
             </tr>
           </thead>
           <tbody>
@@ -266,6 +291,7 @@ export default function AiRagTextPage() {
                 <td>{text.vectorize ? '예' : '아니오'}</td>
                 <td><a href={`/api/ai/rag/text/download?id=${text.id}`}>다운로드</a></td>
                 <td>
+                  <button onClick={() => vectorizeItem(text.id)} className="btn btn-sm btn-info mr-2">벡터화</button>
                   <button onClick={() => startEdit(text)} className="btn btn-sm btn-success mr-2">수정</button>
                   <button onClick={() => deleteAiRagText(text.id)} className="btn btn-sm btn-error">삭제</button>
                 </td>
