@@ -1,32 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { OpenAIStream, StreamingTextResponse } from 'ai';
+import LangchainChainHandler from "../../lib/langchain-chain-handler.js";
 import LangchainAgentHandler from "../../lib/langchain-agent-handler.js";
-import { AgentExecutor, createOpenAIToolsAgent } from "langchain/agents";
-import { pull } from "langchain/hub";
-import { ChatMessageHistory } from "langchain/stores/message/in_memory";
-import { RunnableWithMessageHistory } from "@langchain/core/runnables";
-import { createRetrieverTool } from "langchain/agents/toolkits";
-import { ConversationalRetrievalQAChain } from "langchain/chains";
-import { BufferMemory } from "langchain/memory";
-import { loadQAStuffChain, loadQAMapReduceChain } from "langchain/chains";
-import { SystemMessage, AIMessage, ChatMessage, HumanMessage } from "@langchain/core/messages";
-import { ChatOpenAI, OpenAIEmbeddings } from "@langchain/openai";
-import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
-import { ChatPromptTemplate, HumanMessagePromptTemplate, SystemMessagePromptTemplate, MessagesPlaceholder } from "langchain/prompts";
-//import createSupabaseRetrieverTool from "./langchain-agent-tools/supabase-retriever-tool.js"
-//import createCoinPriceTool from "./langchain-agent-tools/coin-price-tool.js"
-//import createWebbrowserTool from "./langchain-agent-tools/webbrowser-tool.js"
-//import createTavilysearchTool from "./langchain-agent-tools/tavilysearch-tool.js"
-import createDummyTool from "../../lib/langchain-agent-tools/dummy-tool.js"
-import { RequestsGetTool, RequestsPostTool } from "langchain/tools";
-import createChatgptPluginAsyncTool from "../../lib/langchain-agent-tools/chatgpt-plugin-async-tool.js"
 import { createClient } from '@supabase/supabase-js'
-import { z } from "zod";
-import { DynamicStructuredTool } from "@langchain/core/tools";
 
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY);
-
-var langchainAgentHandler = null;
 
 export async function POST(request) {
     const json = await request.json();
@@ -39,155 +17,18 @@ export async function POST(request) {
       .select('*')
       .single();
 
-      process.env.OPENAI_API_KEY = aiSetting.openaiApiKey;
-      process.env.TAVILY_API_KEY = aiSetting.tavilysearchToolApiKey;
-      
       if (aiSetting.useAi) {
-
-        //if (langchainAgentHandler == null) {
-          const systemMessagePrompt = aiSetting.systemPrompt;
-          const prompt = ChatPromptTemplate.fromMessages([
-            ["system", systemMessagePrompt],
-            new MessagesPlaceholder("chat_history"),
-            ["human", "{input}"],
-            new MessagesPlaceholder("agent_scratchpad"),
-          ]);
-          
-          const tools = [];
-
-          const { data: aiToolTexts } = await supabase
-          .from('AiToolText')
-          .select('*')
-          .match({ use: true });
-          for (const aiToolText of aiToolTexts) {
-            ///*
-            const schema = {};
-            const fields = JSON.parse(aiToolText.schema);
-            for (const field of fields) {
-              //console.log(field);
-              if (field.type == "string")
-                schema[field.name] = z.string().describe(field.description)
-              else if (field.type == "number")
-                schema[field.name] = z.number().describe(field.description)
-              //console.log(field.required);
-              if (!field.required)
-                schema[field.name] = schema[field.name].optional()
-              if (field.default != null) {
-                console.log('not null');
-                schema[field.name] = schema[field.name].default(field.default)
-              }
-            }
-            //*/
-            /*
-            const schema = {
-              "way": z.string().describe('편도 혹은 왕복'),
-              "name": z.string().describe('성명'),
-              "phone": z.string().describe('전화번호')
-            };
-            */
-            
-            const tool = new DynamicStructuredTool({
-              name: aiToolText.name,
-              //description: "수도권과 지역(부산/제주/호남)간 편도 혹은 왕복 배송신청합니다,", //aiToolText.description,
-              description: aiToolText.description,
-              schema: z.object(schema),
-              func: async (params) => {
-                //console.log(params);
-                if (aiToolText.useText) {
-                  return aiToolText.text.toString();
-                }
-                else {
-                  const { data: apiSetting } = await supabase
-                  .from('ApiSetting')
-                  .select('*')
-                  .single();
-
-                  //const url = "https://www.automatethem.co" + "/api/action/" + aiToolText.name.replace("-tool", "") + "?key=123&" + q;
-                  //const url = apiSetting.apiUrl + "/api/action/" + aiToolText.name.replace("-tool", "") + "?key=123&" + q;
-                  //var url = "https://www.automatethem.co/api/action/shop-search?key=123&query={query}&size={size}&minPrice={minPrice}&maxPrice={maxPrice}"
-                  var url = aiToolText.api;
-                  //console.log(Object.entries(params)); //[ [ 'query', '휴대폰' ] ]
-                  for (const [key, value] of Object.entries(params)) {
-                    url = url.replace("{" + key + "}", encodeURIComponent(value))
-                  }
-                  //https://cocococo.tistory.com/entry/JavaScript-%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%9C-repalce-replaceAll-%EC%B9%98%ED%99%98-%EB%B0%A9%EB%B2%95
-                  //https://velog.io/@commitnpush/Greedy-Lazy
-                  url = url.replaceAll(/{.*?}/g, "");
-                  console.log(url);
-                  const response = await fetch(url);
-                  //console.log(response);
-                  //const responseJson = await response.json(); 
-                  const responseText = await response.text(); 
-
-                  return responseText;
-                }
-              },
-            });
-            tools.push(tool);
-          }
-
-          /*
-          if (aiSetting.useCoinPriceTool) 
-            tools.push(createCoinPriceTool());
-          if (aiSetting.useTavilysearchTool) 
-            tools.push(createWebbrowserTool());
-          if (aiSetting.useWebbrowserTool) 
-            tools.push(createTavilysearchTool());
-
-          const tool = createSupabaseRetrieverTool({
-              name: 'search_documents_about_user_question', 
-              description: 'Searches and returns documents if has no information about user question.',
-              tableName: 'documents',
-              queryName: 'match_documents'
-          });
-          tools.push(tool);
-          */
-          ///*
-          const { data: aiTools } = await supabase
-          .from('AiToolFile')
-          .select('*')
-          .match({ use: true });
-          for (const aiTool of aiTools) {
-            const toolName = aiTool.name; //'gold-man-check-result-tool';
-            const func = require(`../../lib/langchain-agent-tools/${toolName}.js`).default;
-            var tool = null;
-            try {
-              tool = func();
-            }
-            catch(error) {
-              tool = func({});
-            }
-            tools.push(tool);
-          }
-          //*/
-
-          const { data: aiChatgptPlugins } = await supabase
-          .from('AiChatgptPlugin')
-          .select('*')
-          .match({ use: true });
-          if(aiChatgptPlugins.length > 0) {
-            tools.push(new RequestsGetTool());
-            tools.push(new RequestsPostTool());
-          }
-          for (const aiChatgptPlugin of aiChatgptPlugins) {
-            const tool = await createChatgptPluginAsyncTool({ url: aiChatgptPlugin.url });
-            tool.name = aiChatgptPlugin.name;
-            tools.push(tool);
-          }
-
-          if (tools.length == 0) 
-            tools.push(createDummyTool());
-          
-          langchainAgentHandler = new LangchainAgentHandler({prompt, modelName: aiSetting.openaiModelName, tools}); 
-        //}
-
         const { data: aiWebChatSetting } = await supabase
         .from('AiWebChatSetting')
         .select('*')
         .single();
  
+
         if (aiWebChatSetting.useAiWebChat) {
-          const response = await langchainAgentHandler.handleStream(messages, async (text) => {
+          var langchainHandler = new LangchainChainHandler(); 
+          if (aiSetting.useAgent)
+              langchainHandler = new LangchainAgentHandler(); 
+          const response = await langchainHandler.handleStream(messages, async (text) => {
               if (aiSetting.useMessageLog) {
                   //console.log(aiSetting.useMessageLog);
                   //console.log(text);
