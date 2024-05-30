@@ -13,6 +13,7 @@ export default function Page() {
   const [openaiApiKey, setOpenaiApiKey] = useState('');
   const [tavilysearchToolApiKey, setTavilysearchToolApiKey] = useState('');
   const [useMessageLog, setUseMessageLog] = useState(false);
+  const [useAgent, setUseAgent] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const fetchSettings = async () => {
@@ -30,7 +31,8 @@ export default function Page() {
 	      openaiModelName,
       	openaiApiKey,
 	      tavilysearchToolApiKey,
-	      useMessageLog
+	      useMessageLog,
+	      useAgent
       } = data;
       setId(id);
       setUseAi(useAi);
@@ -40,6 +42,7 @@ export default function Page() {
       setOpenaiApiKey(openaiApiKey);
       setTavilysearchToolApiKey(tavilysearchToolApiKey);
       setUseMessageLog(useMessageLog);
+      setUseAgent(useAgent)
     }
     setLoading(false);
   };
@@ -60,7 +63,8 @@ export default function Page() {
 	      openaiModelName: openaiModelName,
         openaiApiKey: openaiApiKey,
         tavilysearchToolApiKey: tavilysearchToolApiKey,
-        useMessageLog: useMessageLog
+        useMessageLog: useMessageLog,
+	useAgent: useAgent
       })
       .match({ id: id });
 
@@ -112,6 +116,7 @@ export default function Page() {
         <label className="block font-bold mb-1">Openai 모델 이름</label>  
 	<p>예) gpt-3.5-turbo</p>
         <p>예) gpt-4</p>
+        <p>예) gpt-4o</p>
         <p>플레이 그라운드 (<a href="https://platform.openai.com/playground" target="_blank">https://platform.openai.com/playground</a>) 우측 상단 모델 리스트의 모델 이름중 하나 선택</p>
         <p>모델에 대한 세부 사항은 여기 (<a href="https://platform.openai.com/docs/models/overview" target="_blank">https://platform.openai.com/docs/models/overview</a>) 를 참고</p>
         <input
@@ -153,7 +158,16 @@ export default function Page() {
           onChange={(e) => setUseMessageLog(e.target.checked)}
         />
       </div>
-            
+
+      <div className="mb-3">
+        <label className="block font-bold mb-1">에이전트 사용</label>
+        <input
+          type="checkbox"
+          checked={useAgent}
+          onChange={(e) => setUseAgent(e.target.checked)}
+        />
+      </div>
+		  
       <button
         type="submit"
         className="shadow py-2 px-3 border bg-blue-500"
